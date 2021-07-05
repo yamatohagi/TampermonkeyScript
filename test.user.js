@@ -22,6 +22,7 @@ console.log(mwurl);
 if ( mwurl.match(/^(?=.*MailView)(?=.*bjapan.cybozu.com)/)) {
   //メールの表示画面のみ下を実行
   function clientSearchButton(){
+    document.getElementById("id01").value = ("copy済")
     var clientfield = document.querySelector("#mainColumn > table.dataView > tbody > tr:nth-child(5) > td > span:nth-child(1) > font")
     //顧客情報欄を参照
     if (clientfield!=null) {

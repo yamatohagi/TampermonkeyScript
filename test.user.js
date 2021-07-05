@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         test
 // @namespace    http://tampermonkey.net/
-// @version      0.123
+// @version      0.13
 // @description  try to take over the world!
 // @author       yamatohagi
 // @match        https://ibjapan.cybozu.com/*

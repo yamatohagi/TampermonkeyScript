@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         test
 // @namespace    http://tampermonkey.net/
-// @version      0.1301
+// @version      0.14
 // @description  try to take over the world!
 // @author       yamatohagi
 // @match        https://*/*
@@ -16,9 +16,10 @@
 //下の欄に【ibjapan.cybozu.com】を入力
 var $ = window.jQuery;
 var mwurl = location.href
+console.log(mwurl);
 
 //////////////////////////////////////////【ibjapan.cybozu.com】///////////////////////////////////
-if ( mwurl.match(/MailView/&/ibjapan.cybozu.com/)) {
+if ( mwurl.match(/^(?=.*MailView)(?=.*bjapan.cybozu.com)/)) {
   //メールの表示画面のみ下を実行
   function clientSearchButton(){
     var clientfield = document.querySelector("#mainColumn > table.dataView > tbody > tr:nth-child(5) > td > span:nth-child(1) > font")
@@ -92,10 +93,20 @@ if ( mwurl.match(/MailView/&/ibjapan.cybozu.com/)) {
       }
     }
     setTimeout( function() {
-      const url = 'https://qiita.com'
+      const url = 'https://www.partyparty.jp/admin/members'
       window.open(url, '_blank')
       console.log('0.1秒遅れて実行です。');
     }, 100 );
+      setTimeout( function() {
+console.log('0.2秒遅れて実行です。');
+              navigator.clipboard.readText()
+    .then((data) => {
+console.log("会員画面")
+document.getElementById("member_search_freeword").value = data;
+
+document.getElementById('member_search_freeword').focus();
+})
+    }, 500 );
   }
   $('tr:nth-child(5)'). prepend($('<th>').append('<input type="button" id="id01" value="会員検索" style="width:100px;height:40px;font-size:20px;background:#FF66CC;" >')).click(function() {
          if(navigator.clipboard){
@@ -108,17 +119,98 @@ if ( mwurl.match(/MailView/&/ibjapan.cybozu.com/)) {
 
 
 //////////////////////////////////////////【gitta】//////////////////////////////
-if ( mwurl.match(/qiita/)) {
+if ( mwurl.match(/^(?=.*partyparty.jp)(?=.*members)(?=.*admin)/)) {
     navigator.clipboard.readText()
     .then((data) => {
-console.log("gitta")
-document.getElementById("url_name").value = data;
+console.log("会員画面")
+document.getElementById("member_search_freeword").value = data;
 
-document.getElementById('url_name').focus();
-
+document.getElementById('member_search_freeword').focus();
 })
+
+       setTimeout( function() {
+ var textbox = document.getElementById("member_search_freeword")
+ const value = textbox.value
+
+ if ( value.match(/@/)) {
+ //valueに@を含む場合の処理
+console.log("mail");
+ //実行ボタン
+let element = document.getElementById('member_search_freeword_target_2');
+element.checked = true;
+
+ }else {
+ if ( value.match(/^(0[5-9]0[0-9]{8}|0[1-9][1-9][0-9]{7})$/)) {
+  //valueにtelを含む場合の処理
+console.log("tel");
+let element = document.getElementById('member_search_freeword_target_5');
+element.checked = true;
+ }else {
+  if(!isNaN(value )) {
+  //valueに数値を含む場合の処理
+  console.log("kaiin");
+let element = document.getElementById('member_search_freeword_target_1');
+element.checked = true;
+
+  }else{
+if(value.match(/^[ぁ-んー　]*$/)){  //"ー"の後ろの文字は全角スペースです。
+  console.log("ひらがな");
+let element = document.getElementById('member_search_freeword_target_4');
+element.checked = true;
+ }else{
+console.log("その他漢字");
+let element = document.getElementById('member_search_freeword_target_3');
+element.checked = true;
+ }
+
+}
+ }
+ }
+    }, 200 );
 }
 //////////////////////////////////////////【gitta】//////////////////////////////
 
 //////////////////////////////////////////【partyparty.jp】//////////////////////////////
+if ( mwurl.match(/^(?=.*partyparty.jp)(?=.*members)(?=.*admin)/)) {
+    document.getElementById("member_search_freeword").onchange = function() {
+ // onchangeイベントが発生した時の処理を記述する
+ var textbox = document.getElementById("member_search_freeword")
+ const value = textbox.value
 
+ if ( value.match(/@/)) {
+ //valueに@を含む場合の処理
+console.log("mail");
+ //実行ボタン
+let element = document.getElementById('member_search_freeword_target_2');
+element.checked = true;
+
+ }else {
+ if ( value.match(/^(0[5-9]0[0-9]{8}|0[1-9][1-9][0-9]{7})$/)) {
+  //valueにtelを含む場合の処理
+console.log("tel");
+let element = document.getElementById('member_search_freeword_target_5');
+element.checked = true;
+ }else {
+  if(!isNaN(value )) {
+  //valueに数値を含む場合の処理
+  console.log("kaiin");
+let element = document.getElementById('member_search_freeword_target_1');
+element.checked = true;
+
+  }else{
+if(value.match(/^[ぁ-んー　]*$/)){  //"ー"の後ろの文字は全角スペースです。
+  console.log("ひらがな");
+let element = document.getElementById('member_search_freeword_target_4');
+element.checked = true;
+ }else{
+console.log("その他漢字");
+let element = document.getElementById('member_search_freeword_target_3');
+element.checked = true;
+ }
+
+}
+ }
+ }
+}
+}
+//////////////////////////////////////////【partyparty.jp】//////////////////////////////

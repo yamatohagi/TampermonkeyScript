@@ -1,10 +1,10 @@
 // ==UserScript==
 // @name         test
 // @namespace    http://tampermonkey.net/
-// @version      0.13
+// @version      0.1301
 // @description  try to take over the world!
 // @author       yamatohagi
-// @match        https://ibjapan.cybozu.com/*
+// @match        https://*/*
 // @icon         data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==
 // @grant        none
 // @require      https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js
@@ -16,7 +16,9 @@
 //下の欄に【ibjapan.cybozu.com】を入力
 var $ = window.jQuery;
 var mwurl = location.href
-if ( mwurl.match(/MailView/)) {
+
+//////////////////////////////////////////【ibjapan.cybozu.com】///////////////////////////////////
+if ( mwurl.match(/MailView/&/ibjapan.cybozu.com/)) {
   //メールの表示画面のみ下を実行
   function clientSearchButton(){
     var clientfield = document.querySelector("#mainColumn > table.dataView > tbody > tr:nth-child(5) > td > span:nth-child(1) > font")
@@ -101,9 +103,22 @@ if ( mwurl.match(/MailView/)) {
         }
       clientSearchButton()
 });;
-  //ボタンを追加
-     //「.friends」のボタンをクリックしたらダイアログを表示
 }
+//////////////////////////////////////////【ibjapan.cybozu.com】//////////////////////////////
 
 
-// Your code here...
+//////////////////////////////////////////【gitta】//////////////////////////////
+if ( mwurl.match(/qiita/)) {
+    navigator.clipboard.readText()
+    .then((data) => {
+console.log("gitta")
+document.getElementById("url_name").value = data;
+
+document.getElementById('url_name').focus();
+
+})
+}
+//////////////////////////////////////////【gitta】//////////////////////////////
+
+//////////////////////////////////////////【partyparty.jp】//////////////////////////////
+

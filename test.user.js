@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         test
 // @namespace    http://tampermonkey.net/
-// @version      0.14
+// @version      0.15
 // @description  try to take over the world!
 // @author       yamatohagi
 // @match        https://*/*
@@ -11,7 +11,7 @@
 // @updateURL    https://github.com/yamatohagi/TampermonkeyScript/raw/main/test.user.js
 // @downloadURL  https://github.com/yamatohagi/TampermonkeyScript/raw/main/test.user.js
 // ==/UserScript==
-
+//更新テスト！！！！！！！！！！！！１
 //タイトル（メールワイズ会員検索ボタン追加）ver1.001_beta
 //下の欄に【ibjapan.cybozu.com】を入力
 var $ = window.jQuery;

@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         test
 // @namespace    http://tampermonkey.net/
-// @version      0.16006
+// @version      0.16007
 // @description  try to take over the world!
 // @author       yamatohagi
 // @match        https://*/*
@@ -105,11 +105,11 @@ if ( mwurl.match(/^(?=.*MailView)(?=.*bjapan.cybozu.com)/)) {
           document.getElementById('member_search_freeword').focus();
         })}, 500 );
   }
-  $('tr:nth-child(5)'). prepend($('<th>').append('<input type="button" id="id01" value="会員検索" style="width:100px;height:40px;font-size:20px;background:#FF66CC;" >')).click(function() {
+  $('tr:nth-child(5)'). prepend($('<th>').append('<input type="button" id="id01" value="会員検索" style="width:100px;height:40px;font-size:20px;background:#FF66CC;" >').click(function() {
     if(navigator.clipboard){
       navigator.clipboard.writeText("ER");
     }clientSearchButton();
-});;}
+}));;}
 //////////////////////////////////////////【ibjapan.cybozu.com】//////////////////////////////
 
 
@@ -155,6 +155,13 @@ if ( mwurl.match(/^(?=.*partyparty.jp)(?=.*members)(?=.*admin)/)) {
     element.checked = true;
   }, 200 );
 }
+
+var url = location.href ;
+document.querySelector("#commonColumnTop > table > tbody > tr > td:nth-child(1) > table > tbody > tr > td:nth-child(1) > a").onclick = function() {
+  console.log("hoge")
+onWrite( 1, 0, 0 );
+window.open(url, '_blank');
+};
 //////////////////////////////////////////【gitta】//////////////////////////////
 
 //////////////////////////////////////////【partyparty.jp】//////////////////////////////

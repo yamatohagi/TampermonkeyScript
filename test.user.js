@@ -26,7 +26,7 @@ if ( mwurl.match(/^(?=.*MailView)(?=.*bjapan.cybozu.com)/)) {
   let clientmailaddress = '';
   let result = '';
   let clientfield = document.querySelector("#mainColumn > table.dataView > tbody > tr:nth-child(5) > td > span:nth-child(1) > font");
-  let clientaboutText = clientfield.textContent;
+  let clientaboutText = '';
 
   //メールの表示画面のみ下を実行
   function clientSearchButton(){
@@ -34,6 +34,7 @@ if ( mwurl.match(/^(?=.*MailView)(?=.*bjapan.cybozu.com)/)) {
     //顧客情報欄を参照
     if (clientfield!=null) {
       console.log("５です");
+      clientaboutText = clientfield.textContent
       //テキストに変換
       if ( clientaboutText.match(/tickets.chatplus.jp|chatplus/)) {
         //条件に合致した場合
@@ -64,6 +65,7 @@ if ( mwurl.match(/^(?=.*MailView)(?=.*bjapan.cybozu.com)/)) {
     else{
         clientfield = document.querySelector("#mainColumn > table.dataView > tbody > tr:nth-child(4) > td > span:nth-child(1) > font");
         console.log("4です");
+        clientaboutText = clientfield.textContent
         //テキストに変換
         if ( clientaboutText.match(/tickets.chatplus.jp|chatplus/)) {
           //条件分岐チャットの場合
@@ -79,17 +81,17 @@ if ( mwurl.match(/^(?=.*MailView)(?=.*bjapan.cybozu.com)/)) {
               //格納をコピー
             }
           }
-      }
-      else{
-        //条件分岐問い合わせの場合
-        result = clientaboutText.match(/<(.*)>/);
-        if (result != null) {
-          clientaboutText = (result[1]);
         }
-        if(navigator.clipboard){
-          navigator.clipboard.writeText(clientaboutText);
+        else{
+          //条件分岐問い合わせの場合
+          result = clientaboutText.match(/<(.*)>/);
+          if (result != null) {
+            clientaboutText = (result[1]);
+          }
+          if(navigator.clipboard){
+            navigator.clipboard.writeText(clientaboutText);
+          }
         }
-      }
     }
     setTimeout( function() {
       const url = 'https://www.partyparty.jp/admin/members';

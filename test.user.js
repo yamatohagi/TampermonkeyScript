@@ -1,13 +1,12 @@
 // ==UserScript==
 // @name         test
 // @namespace    http://tampermonkey.net/
-// @version      0.16005
+// @version      0.16006
 // @description  try to take over the world!
 // @author       yamatohagi
 // @match        https://*/*
 // @icon         data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==
 // @grant        none
-// @require      https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js
 // @updateURL    https://github.com/yamatohagi/TampermonkeyScript/raw/main/test.user.js
 // @downloadURL  https://github.com/yamatohagi/TampermonkeyScript/raw/main/test.user.js
 // ==/UserScript==

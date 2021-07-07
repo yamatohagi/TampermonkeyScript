@@ -23,7 +23,7 @@ let element = '';
 if ( mwurl.match(/^(?=.*MailView)(?=.*bjapan.cybozu.com)/)) {
   //変数宣言
   let mailfield = document.querySelector("#mail-body-area > div > div > div:nth-child(3)");
-  let clientmailaddress = mailfield.textContent;
+  let clientmailaddress = '';
   let result = '';
   let clientfield = document.querySelector("#mainColumn > table.dataView > tbody > tr:nth-child(5) > td > span:nth-child(1) > font");
   let clientaboutText = clientfield.textContent;
@@ -38,6 +38,7 @@ if ( mwurl.match(/^(?=.*MailView)(?=.*bjapan.cybozu.com)/)) {
       if ( clientaboutText.match(/tickets.chatplus.jp|chatplus/)) {
         //条件に合致した場合
         //メール内の顧客情報欄を参照
+        clientmailaddress = mailfield.textContent;
         //問い合わせ内容をテキストに変換
         result = mailfield.textContent.match(/メールアドレス】(.*)/);
         if (result != null) {
@@ -67,6 +68,7 @@ if ( mwurl.match(/^(?=.*MailView)(?=.*bjapan.cybozu.com)/)) {
         if ( clientaboutText.match(/tickets.chatplus.jp|chatplus/)) {
           //条件分岐チャットの場合
           //顧客情報欄を参照
+          clientmailaddress = mailfield.textContent;
           //問い合わせ内容をテキストに変換
           result = mailfield.textContent.match(/メールアドレス】(.*)/);
           if (result != null) {

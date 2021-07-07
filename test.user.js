@@ -118,8 +118,7 @@ if ( mwurl.match(/^(?=.*partyparty.jp)(?=.*members)(?=.*admin)/)) {
     document.getElementById('member_search_freeword').focus();
   })
   setTimeout( function() {
-    var textbox = document.getElementById("member_search_freeword");
-    const value = textbox.value;
+    const value = document.getElementById("member_search_freeword").value;
     if ( value.match(/@/)) {
       //valueに@を含む場合の処理
       console.log("mail");
@@ -159,7 +158,7 @@ if ( mwurl.match(/^(?=.*partyparty.jp)(?=.*members)(?=.*admin)/)) {
 if ( mwurl.match(/^(?=.*partyparty.jp)(?=.*members)(?=.*admin)/)) {
   document.getElementById("member_search_freeword").onchange = function() {
     // onchangeイベントが発生した時の処理を記述する
-    let value = document.getElementById("member_search_freeword").value;
+    const value = document.getElementById("member_search_freeword").value;
 
     if ( value.match(/@/)) {
       //valueに@を含む場合の処理

@@ -93,7 +93,7 @@ if ( mwurl.match(/^(?=.*MailView)(?=.*bjapan.cybozu.com)/)) {
         }
     }
     setTimeout( function() {
-      const url = 'https://www.partyparty.jp/admin/members';
+      const url = 'https://www.partyparty.jp/admin/members?name=mwtoadmin';
       window.open(url, '_blank');
       console.log('0.1秒遅れて実行です。');
     }, 100 );
@@ -114,7 +114,7 @@ if ( mwurl.match(/^(?=.*MailView)(?=.*bjapan.cybozu.com)/)) {
 
 
 //////////////////////////////////////////【gitta】//////////////////////////////
-if ( mwurl.match(/^(?=.*partyparty.jp)(?=.*members)(?=.*admin)/)) {
+if ( mwurl.match(/^(?=.*partyparty.jp)(?=.*members)(?=.*mwtoadmin)(?=.*admin)/)) {
   navigator.clipboard.readText().then((data) => {
     console.log("会員画面");
     document.getElementById("member_search_freeword").value = data;
@@ -153,15 +153,8 @@ if ( mwurl.match(/^(?=.*partyparty.jp)(?=.*members)(?=.*admin)/)) {
       }
     }
     element.checked = true;
-  }, 200 );
+  }, 50 );
 }
-
-var url = location.href ;
-document.querySelector("#commonColumnTop > table > tbody > tr > td:nth-child(1) > table > tbody > tr > td:nth-child(1) > a").onclick = function() {
-  console.log("hoge")
-onWrite( 1, 0, 0 );
-window.open(url, '_blank');
-};
 //////////////////////////////////////////【gitta】//////////////////////////////
 
 //////////////////////////////////////////【partyparty.jp】//////////////////////////////

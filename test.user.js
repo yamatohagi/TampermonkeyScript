@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         test
 // @namespace    http://tampermonkey.net/
-// @version      0.16008
+// @version      0.16009
 // @description  try to take over the world!
 // @author       yamatohagi
 // @match        https://*/*
@@ -10,16 +10,14 @@
 // @updateURL    https://github.com/yamatohagi/TampermonkeyScript/raw/main/test.user.js
 // @downloadURL  https://github.com/yamatohagi/TampermonkeyScript/raw/main/test.user.js
 // ==/UserScript==
-//更新テストおはよう！！！！！！！！！！！！！！１
-//タイトル（メールワイズ会員検索ボタン追加）ver1.001_beta
-//下の欄に【ibjapan.cybozu.com】を入力
-let $ = window.jQuery;
 let mwurl = location.href
 console.log(mwurl);
-let element = '';
 
-//////////////////////////////////////////【ibjapan.cybozu.com】///////////////////////////////////
+//////////////////////////////////////////【japan.cybozu.com】///////////////////////////////////
 if ( mwurl.match(/^(?=.*MailView)(?=.*bjapan.cybozu.com)/)) {
+  //定形宣言
+  let $ = window.jQuery;
+  let element = '';
   //変数宣言
   let mailfield = document.querySelector("#mail-body-area > div > div > div:nth-child(3)");
   let clientmailaddress = '';
@@ -97,24 +95,20 @@ if ( mwurl.match(/^(?=.*MailView)(?=.*bjapan.cybozu.com)/)) {
       window.open(url, '_blank');
       console.log('0.1秒遅れて実行です。');
     }, 100 );
-      setTimeout( function() {
-        console.log('0.2秒遅れて実行です。');
-        navigator.clipboard.readText().then((data) => {
-          console.log("会員画面")
-          document.getElementById("member_search_freeword").value = data;
-          document.getElementById('member_search_freeword').focus();
-        })}, 500 );
   }
   $('tr:nth-child(5)'). prepend($('<th>').append('<input type="button" id="id01" value="会員検索" style="width:100px;height:40px;font-size:20px;background:#FF66CC;" >').click(function() {
     if(navigator.clipboard){
       navigator.clipboard.writeText("ER");
     }clientSearchButton();
 }));;}
-//////////////////////////////////////////【ibjapan.cybozu.com】//////////////////////////////
+//////////////////////////////////////////【japan.cybozu.com】//////////////////////////////
 
 
-//////////////////////////////////////////【gitta】//////////////////////////////
+//////////////////////////////////////////【mw to admin】//////////////////////////////
 if ( mwurl.match(/^(?=.*partyparty.jp)(?=.*members)(?=.*mwtoadmin)(?=.*admin)/)) {
+  //定形宣言
+  let $ = window.jQuery;
+  let element = '';
   navigator.clipboard.readText().then((data) => {
     console.log("会員画面");
     document.getElementById("member_search_freeword").value = data;
@@ -153,12 +147,15 @@ if ( mwurl.match(/^(?=.*partyparty.jp)(?=.*members)(?=.*mwtoadmin)(?=.*admin)/))
       }
     }
     element.checked = true;
-  }, 50 );
+  }, 100 );
 }
-//////////////////////////////////////////【gitta】//////////////////////////////
+//////////////////////////////////////////【mw to admin】//////////////////////////////
 
-//////////////////////////////////////////【partyparty.jp】//////////////////////////////
+//////////////////////////////////////////【admin】//////////////////////////////
 if ( mwurl.match(/^(?=.*partyparty.jp)(?=.*members)(?=.*admin)/)) {
+  //定形宣言
+  let $ = window.jQuery;
+  let element = '';
   document.getElementById("member_search_freeword").onchange = function() {
     // onchangeイベントが発生した時の処理を記述する
     const value = document.getElementById("member_search_freeword").value;
@@ -196,4 +193,4 @@ if ( mwurl.match(/^(?=.*partyparty.jp)(?=.*members)(?=.*admin)/)) {
   element.checked = true;
   }
 }
-//////////////////////////////////////////【partyparty.jp】//////////////////////////////
+//////////////////////////////////////////【admin】//////////////////////////////

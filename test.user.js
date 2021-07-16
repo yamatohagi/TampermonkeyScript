@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         test
 // @namespace    http://tampermonkey.net/
-// @version      0.16009
+// @version      0.16011
 // @description  try to take over the world!
 // @author       yamatohagi
 // @match        https://*/*
@@ -156,6 +156,47 @@ if ( mwurl.match(/^(?=.*partyparty.jp)(?=.*members)(?=.*admin)/)) {
   //定形宣言
   let $ = window.jQuery;
   let element = '';
+  //////////______________________________________会員詳細情報画面のみ
+  let result = '';
+  let maillcopyclientfield = '';
+  let namecopyclientfield = '';
+  let clientsyousai = document.querySelector("body > div > h2")
+  var clientsyousaiText = clientsyousai.textContent
+  if (clientsyousaiText.match(/会員詳細情報/)) {
+    //ここに処理
+    console.log("会員詳細情報が実行されています");
+    $('table:nth-child(7)').prepend($('<th>').append('<input type="button" id="id001" value="メアドコピー" style="width:80px;height:40px;font-size:8px;background:#FF66CC;" >').click(function () {
+      maillcopyclientfield = document.querySelector("body > div > table:nth-child(7)")
+      result = maillcopyclientfield.textContent.match(/メールアドレス(.*)連絡用メールアドレス/);
+      if (result != null) {
+        maillcopyclientfield = (result[1]);
+        //合致内容があればresultに格納
+        if (navigator.clipboard) {
+          navigator.clipboard.writeText(maillcopyclientfield);
+          //格納をコピー
+          console.log(maillcopyclientfield);
+        }
+      }
+    }));;
+    $('table:nth-child(7)').prepend($('<th>').append('<input type="button" id="id0001" value="名前コピー" style="width:80px;height:40px;font-size:8px;background:#FF66CC;" >').click(function () {
+      namecopyclientfield = document.querySelector("body > div > table:nth-child(7)")
+      var tagetString = namecopyclientfield.textContent
+      var separatorString = /\s+/;
+      var arrayStrig = tagetString.split(separatorString);
+      let rinzi = arrayStrig[0];
+      result = rinzi.match(/姓名（ふりがな）(.*)/);
+      if (result != null) {
+        let clientname1 = (result[1]);
+        //合致内容があればresultに格納
+        if (navigator.clipboard) {
+          navigator.clipboard.writeText(clientname1);
+          //格納をコピー
+          console.log(clientname1);
+        }
+      }
+    }));;
+  }
+  //////////______________________________________会員詳細情報画面のみ
   document.getElementById("member_search_freeword").onchange = function() {
     // onchangeイベントが発生した時の処理を記述する
     const value = document.getElementById("member_search_freeword").value;

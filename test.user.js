@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         test
 // @namespace    http://tampermonkey.net/
-// @version      0.16011
+// @version      0.16012
 // @description  try to take over the world!
 // @author       yamatohagi
 // @match        https://*/*
@@ -165,7 +165,8 @@ if ( mwurl.match(/^(?=.*partyparty.jp)(?=.*members)(?=.*admin)/)) {
   if (clientsyousaiText.match(/会員詳細情報/)) {
     //ここに処理
     console.log("会員詳細情報が実行されています");
-    $('table:nth-child(7)').prepend($('<th>').append('<input type="button" id="id001" value="メアドコピー" style="width:80px;height:40px;font-size:8px;background:#FF66CC;" >').click(function () {
+    $('table:nth-child(7)').prepend($('<th>').append('<input type="button" id="id001" value="メアドコピー" style="width:80px;height:40px;font-size:8px;background:#3399FF;" >').click(function () {
+      document.getElementById("id001").value = ("copy済")
       maillcopyclientfield = document.querySelector("body > div > table:nth-child(7)")
       result = maillcopyclientfield.textContent.match(/メールアドレス(.*)連絡用メールアドレス/);
       if (result != null) {
@@ -178,7 +179,8 @@ if ( mwurl.match(/^(?=.*partyparty.jp)(?=.*members)(?=.*admin)/)) {
         }
       }
     }));;
-    $('table:nth-child(7)').prepend($('<th>').append('<input type="button" id="id0001" value="名前コピー" style="width:80px;height:40px;font-size:8px;background:#FF66CC;" >').click(function () {
+    $('table:nth-child(7)').prepend($('<th>').append('<input type="button" id="id0001" value="名前コピー" style="width:80px;height:40px;font-size:8px;background:#00CC33;" >').click(function () {
+      document.getElementById("id0001").value = ("copy済")
       namecopyclientfield = document.querySelector("body > div > table:nth-child(7)")
       var tagetString = namecopyclientfield.textContent
       var separatorString = /\s+/;

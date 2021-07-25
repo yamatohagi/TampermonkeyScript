@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         test
 // @namespace    http://tampermonkey.net/
-// @version      0.16016
+// @version      0.16017
 // @description  try to take over the world!
 // @author       yamatohagi
 // @match        https://*/*
@@ -197,7 +197,7 @@ if ( mwurl.match(/^(?=.*partyparty.jp)(?=.*members)(?=.*admin)/)) {
         }
       }
     }));;
-  $('table:nth-child(7)').prepend($('<th>').append('<input type="button" id="id0003" value="フルネーム" style="width:80px;height:40px;font-size:8px;background:#00CC33;" >').click(function () {
+  $('table:nth-child(7)').prepend($('<th>').append('<input type="button" id="id0003" value="フルネーム" style="width:80px;height:40px;font-size:8px;background:#FFCC66;" >').click(function () {
       document.getElementById("id0003").value = ("copy済")
       let fullNameString = document.querySelector("body > div > table:nth-child(7)").textContent
       result = fullNameString.match(/姓名（ふりがな）(.*)\s[（(]/);

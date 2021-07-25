@@ -198,6 +198,21 @@ if ( mwurl.match(/^(?=.*partyparty.jp)(?=.*members)(?=.*admin)/)) {
       }
     }));;
   }
+  $('table:nth-child(7)').prepend($('<th>').append('<input type="button" id="id0003" value="フルネーム" style="width:80px;height:40px;font-size:8px;background:#00CC33;" >').click(function () {
+      document.getElementById("id0003").value = ("copy済")
+      let fullNameString = document.querySelector("body > div > table:nth-child(7)").textContent
+      result = fullNameString.match(/姓名（ふりがな）(.*)\s[（(]/);
+            if (result != null) {
+        let clientname1 = (result[1]);
+        //合致内容があればresultに格納
+        if (navigator.clipboard) {
+          navigator.clipboard.writeText(clientname1);
+          //格納をコピー
+          console.log(clientname1);
+        }
+      }
+    }));;
+  }
   //////////______________________________________会員詳細情報画面のみ
   document.getElementById("member_search_freeword").onchange = function() {
     // onchangeイベントが発生した時の処理を記述する

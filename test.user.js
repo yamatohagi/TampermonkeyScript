@@ -179,7 +179,7 @@ if ( mwurl.match(/^(?=.*partyparty.jp)(?=.*members)(?=.*admin)/)) {
         }
       }
     }));;
-    $('table:nth-child(7)').prepend($('<th>').append('<input type="button" id="id0001" value="名前コピー" style="width:80px;height:40px;font-size:8px;background:#00CC33;" >').click(function () {
+    $('table:nth-child(7)').prepend($('<th>').append('<input type="button" id="id0001" value="苗字コピー" style="width:80px;height:40px;font-size:8px;background:#00CC33;" >').click(function () {
       document.getElementById("id0001").value = ("copy済")
       namecopyclientfield = document.querySelector("body > div > table:nth-child(7)")
       var tagetString = namecopyclientfield.textContent

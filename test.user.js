@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         test
 // @namespace    http://tampermonkey.net/
-// @version      0.16020
+// @version      0.16021
 // @description  try to take over the world!
 // @author       yamatohagi
 // @match        https://*/*
@@ -252,7 +252,7 @@ if ( mwurl.match(/^(?=.*partyparty.jp)(?=.*members)(?=.*admin)/)) {
 }
 //////////////////////////////////////////【admin】//////////////////////////////
 //////////////////////////////////////////【adminパーティーのみ】//////////////////////////////
-if (mwurl.match(/\/admin\/parties/)) {
+if (mwurl.match(/\/admin\/parties\/\d/)) {
         let $ = window.jQuery;
       $('div.col-sm-7.text-left').append($('<div>').append('<input type="button" id="id22" value="パーティー名コピー" style="width:140px;height:30px;font-size:14px;background:#00CCFF;" >'))
     document.getElementById("id22").onclick = function() {

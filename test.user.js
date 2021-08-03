@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         test
 // @namespace    http://tampermonkey.net/
-// @version      0.16017
+// @version      0.16020
 // @description  try to take over the world!
 // @author       yamatohagi
 // @match        https://*/*
@@ -251,3 +251,20 @@ if ( mwurl.match(/^(?=.*partyparty.jp)(?=.*members)(?=.*admin)/)) {
   }
 }
 //////////////////////////////////////////【admin】//////////////////////////////
+//////////////////////////////////////////【adminパーティーのみ】//////////////////////////////
+if (mwurl.match(/\/admin\/parties/)) {
+        let $ = window.jQuery;
+      $('div.col-sm-7.text-left').append($('<div>').append('<input type="button" id="id22" value="パーティー名コピー" style="width:140px;height:30px;font-size:14px;background:#00CCFF;" >'))
+    document.getElementById("id22").onclick = function() {
+        var partyF = document.getElementsByClassName('party_floor span-separate-sentences')[0].textContent
+        var partyB = document.getElementsByClassName('party_start_at')[0].textContent
+        var partyFB = (partyF + partyB);
+        if (navigator.clipboard) {
+          navigator.clipboard.writeText(partyFB);
+          //格納をコピー
+          console.log(partyFB);
+        }
+    }
+  
+}
+//////////////////////////////////////////【adminパーティーのみ】//////////////////////////////

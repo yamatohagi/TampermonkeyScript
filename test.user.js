@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         test
 // @namespace    http://tampermonkey.net/
-// @version      0.16022
+// @version      0.16023
 // @description  try to take over the world!
 // @author       yamatohagi
 // @match        https://*/*
@@ -253,10 +253,10 @@ if ( mwurl.match(/^(?=.*partyparty.jp)(?=.*members)(?=.*admin)/)) {
 //////////////////////////////////////////【admin】//////////////////////////////
 //////////////////////////////////////////【adminパーティーのみ】//////////////////////////////
 if (mwurl.match(/\/admin\/parties\/\d/)) {
-        let $ = window.jQuery;
-      $('div.col-sm-7.text-left').append($('<div>').append('<input type="button" id="id22" value="パーティー名コピー" style="width:140px;height:30px;font-size:14px;background:#00CCFF;" >'))
+      let $ = window.jQuery;
+      $('div.col-sm-7.text-left').append($('<div>').append('<input type="button" id="id23" value="ID含めてコピー" style="width:100px;height:30px;font-size:14px;background:#00CCFF;" >').append('<input type="button" id="id22" value="パーティー名コピー" style="width:140px;height:30px;font-size:14px;background:#00CCFF;" >'))
     document.getElementById("id22").onclick = function() {
-      document.getElementById("id22").style = ("background:#CCCCCC")
+        document.getElementById("id22").style = ("background:#CCCCCC")
         var partyF = document.getElementsByClassName('party_floor span-separate-sentences')[0].textContent
         var partyB = document.getElementsByClassName('party_start_at')[0].textContent
         var partyFB = (partyF + partyB);
@@ -266,6 +266,17 @@ if (mwurl.match(/\/admin\/parties\/\d/)) {
           console.log(partyFB);
         }
     }
-  
+    document.getElementById("id23").onclick = function() {
+        document.getElementById("id23").style = ("background:#CCCCCC")
+        var partyID = document.getElementsByClassName('party_id')[0].textContent
+        var partyF = document.getElementsByClassName('party_floor span-separate-sentences')[0].textContent
+        var partyB = document.getElementsByClassName('party_start_at')[0].textContent
+        var partyFB = (partyID + ' ' + partyF + ' ' + partyB);
+        if (navigator.clipboard) {
+          navigator.clipboard.writeText(partyFB);
+          //格納をコピー
+          console.log(partyFB);
+        }
+    }
 }
 //////////////////////////////////////////【adminパーティーのみ】//////////////////////////////

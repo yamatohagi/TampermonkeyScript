@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         test
 // @namespace    http://tampermonkey.net/
-// @version      0.16025
+// @version      0.16026
 // @description  try to take over the world!
 // @author       yamatohagi
 // @match        https://*/*
@@ -158,76 +158,75 @@ if (mwurl.match(/^(?=.*partyparty.jp)(?=.*members)(?=.*admin)/)) {
     let $ = window.jQuery;
     let element = '';
     //////////______________________________________会員詳細情報画面のみ
-    let result = '';
-    let maillcopyclientfield = '';
-    let namecopyclientfield = '';
-    let clientsyousai = document.querySelector("body > div > h2")
-    var clientsyousaiText = clientsyousai.textContent
-    if (clientsyousaiText.match(/会員詳細情報/)) {
-        //ここに処理
-        console.log("会員詳細情報が実行されています");
-        $('th.background-lightgray:eq(6)').append($('<input type="button" id="id001" value="メアドコピー" style="width:80px;height:25px;font-size:8px;background:#3399FF;" >').click(function () {
-            document.getElementById("id001").value = ("copy済")
-            document.getElementById("id001").style.background = "#CCCCCC"
-            setTimeout(function () {
-                document.getElementById("id001").value = ("メアドコピー")
-                document.getElementById("id001").style.background = "#3399FF"
-            }, 2000);
-            maillcopyclientfield = document.querySelector("body > div > table:nth-child(7)")
-            result = maillcopyclientfield.textContent.match(/メールアドレス(.*)連絡用メールアドレス/);
-            if (result != null) {
-                maillcopyclientfield = (result[1]);
-                //合致内容があればresultに格納
-                if (navigator.clipboard) {
-                    navigator.clipboard.writeText(maillcopyclientfield);
-                    //格納をコピー
-                    console.log(maillcopyclientfield);
-                }
-            }
-        }));;
-        $('th.background-lightgray:eq(2)').append($('<input type="button" id="id0003" value="フルネーム" style="width:70px;height:27px;font-size:8px;background:#FFCC66;" >').click(function () {
-            document.getElementById("id0003").value = ("copy済")
+      let result = '';
+  let maillcopyclientfield = '';
+  let namecopyclientfield = '';
+  let clientsyousai = document.querySelector("body > div > h2")
+  var clientsyousaiText = clientsyousai.textContent
+  if (clientsyousaiText.match(/会員詳細情報/)) {
+    //ここに処理
+    console.log("会員詳細情報が実行されています");
+    $('th.background-lightgray:eq(6)').append($('<input type="button" id="id001" value="メアドコピー" style="width:80px;height:25px;font-size:8px;background:#3399FF;" >').click(function () {
+      document.getElementById("id001").value = ("copy済")
+       document.getElementById("id001").style.background = "#CCCCCC"
+          setTimeout( function() {
+    document.getElementById("id001").value = ("メアドコピー")
+      document.getElementById("id001").style.background = "#3399FF"
+}, 2000 );
+      maillcopyclientfield = document.getElementsByClassName('table table-sm table-bordered')[0]
+      result = maillcopyclientfield.textContent.match(/メールアドレス(.*)連絡用メールアドレス/);
+      if (result != null) {
+        maillcopyclientfield = (result[1]);
+        //合致内容があればresultに格納
+        if (navigator.clipboard) {
+          navigator.clipboard.writeText(maillcopyclientfield);
+          //格納をコピー
+          console.log(maillcopyclientfield);
+        }
+      }
+    }));;
+  $('th.background-lightgray:eq(2)').append($('<input type="button" id="id0003" value="フルネーム" style="width:70px;height:27px;font-size:8px;background:#FFCC66;" >').click(function () {
+      document.getElementById("id0003").value = ("copy済")
             document.getElementById("id0003").style.background = "#CCCCCC"
-            setTimeout(function () {
-                document.getElementById("id0003").value = ("フルネーム")
-                document.getElementById("id0003").style.background = "#FFCC66"
-            }, 2000);
-            let fullNameString = document.querySelector("body > div > table:nth-child(7)").textContent
-            result = fullNameString.match(/姓名（ふりがな）(.*)\s[（(]/);
+          setTimeout( function() {
+    document.getElementById("id0003").value = ("フルネーム")
+      document.getElementById("id0003").style.background = "#FFCC66"
+}, 2000 );
+      let fullNameString = document.getElementsByClassName('table table-sm table-bordered')[0].textContent
+      result = fullNameString.match(/姓名（ふりがな）(.*)\s[（(]/);
             if (result != null) {
-                let clientname1 = (result[1]);
-                //合致内容があればresultに格納
-                if (navigator.clipboard) {
-                    navigator.clipboard.writeText(clientname1);
-                    //格納をコピー
-                    console.log(clientname1);
-                }
-            }
-        }));;
-        $('th.background-lightgray:eq(2)').append($('<input type="button" id="id0001" value="苗字" style="width:50px;height:27px;font-size:8px;background:#00CC33;" >').click(function () {
-            document.getElementById("id0001").value = "copy済"
-            document.getElementById("id0001").style.background = "#CCCCCC"
-            setTimeout(function () {
-                document.getElementById("id0001").value = ("苗字")
-                document.getElementById("id0001").style.background = "#00CC33"
-            }, 2000);
-            namecopyclientfield = document.querySelector("body > div > table:nth-child(7)")
-            var tagetString = namecopyclientfield.textContent
-            var separatorString = /\s+/;
-            var arrayStrig = tagetString.split(separatorString);
-            let rinzi = arrayStrig[0];
-            result = rinzi.match(/姓名（ふりがな）(.*)/);
-            if (result != null) {
-                let clientname1 = (result[1]);
-                //合致内容があればresultに格納
-                if (navigator.clipboard) {
-                    navigator.clipboard.writeText(clientname1);
-                    //格納をコピー
-                    console.log(clientname1);
-                }
-            }
-        }));;
-    }
+        let clientname1 = (result[1]);
+        //合致内容があればresultに格納
+        if (navigator.clipboard) {
+          navigator.clipboard.writeText(clientname1);
+          //格納をコピー
+          console.log(clientname1);
+        }
+      }
+    }));;
+      $('th.background-lightgray:eq(2)').append($('<input type="button" id="id0001" value="苗字" style="width:50px;height:27px;font-size:8px;background:#00CC33;" >').click(function () {
+      document.getElementById("id0001").value = "copy済"
+      document.getElementById("id0001").style.background = "#CCCCCC"
+          setTimeout( function() {
+    document.getElementById("id0001").value = ("苗字")
+      document.getElementById("id0001").style.background = "#00CC33"
+}, 2000 );
+      var tagetString = document.getElementsByClassName('table table-sm table-bordered')[0].textContent
+      var separatorString = /\s+/;
+      var arrayStrig = tagetString.split(separatorString);
+      let rinzi = arrayStrig[0];
+      result = rinzi.match(/姓名（ふりがな）(.*)/);
+      if (result != null) {
+        let clientname1 = (result[1]);
+        //合致内容があればresultに格納
+        if (navigator.clipboard) {
+          navigator.clipboard.writeText(clientname1);
+          //格納をコピー
+          console.log(clientname1);
+        }
+      }
+    }));;
+  }
     //////////______________________________________会員詳細情報画面のみ
     document.getElementById("member_search_freeword").onchange = function () {
         // onchangeイベントが発生した時の処理を記述する

@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         test
 // @namespace    http://tampermonkey.net/
-// @version      0.16026
+// @version      0.16027
 // @description  try to take over the world!
 // @author       yamatohagi
 // @match        https://*/*
@@ -158,7 +158,7 @@ if (mwurl.match(/^(?=.*partyparty.jp)(?=.*members)(?=.*admin)/)) {
     let $ = window.jQuery;
     let element = '';
     //////////______________________________________会員詳細情報画面のみ
-      let result = '';
+  let result = '';
   let maillcopyclientfield = '';
   let namecopyclientfield = '';
   let clientsyousai = document.querySelector("body > div > h2")
@@ -168,11 +168,11 @@ if (mwurl.match(/^(?=.*partyparty.jp)(?=.*members)(?=.*admin)/)) {
     console.log("会員詳細情報が実行されています");
     $('th.background-lightgray:eq(6)').append($('<input type="button" id="id001" value="メアドコピー" style="width:80px;height:25px;font-size:8px;background:#3399FF;" >').click(function () {
       document.getElementById("id001").value = ("copy済")
-       document.getElementById("id001").style.background = "#CCCCCC"
-          setTimeout( function() {
-    document.getElementById("id001").value = ("メアドコピー")
-      document.getElementById("id001").style.background = "#3399FF"
-}, 2000 );
+      document.getElementById("id001").style.background = "#CCCCCC"
+      setTimeout(function () {
+        document.getElementById("id001").value = ("メアドコピー")
+        document.getElementById("id001").style.background = "#3399FF"
+      }, 2000);
       maillcopyclientfield = document.getElementsByClassName('table table-sm table-bordered')[0]
       result = maillcopyclientfield.textContent.match(/メールアドレス(.*)連絡用メールアドレス/);
       if (result != null) {
@@ -185,16 +185,16 @@ if (mwurl.match(/^(?=.*partyparty.jp)(?=.*members)(?=.*admin)/)) {
         }
       }
     }));;
-  $('th.background-lightgray:eq(2)').append($('<input type="button" id="id0003" value="フルネーム" style="width:70px;height:27px;font-size:8px;background:#FFCC66;" >').click(function () {
+    $('th.background-lightgray:eq(2)').append($('<input type="button" id="id0003" value="フルネーム" style="width:70px;height:27px;font-size:8px;background:#FFCC66;" >').click(function () {
       document.getElementById("id0003").value = ("copy済")
-            document.getElementById("id0003").style.background = "#CCCCCC"
-          setTimeout( function() {
-    document.getElementById("id0003").value = ("フルネーム")
-      document.getElementById("id0003").style.background = "#FFCC66"
-}, 2000 );
+      document.getElementById("id0003").style.background = "#CCCCCC"
+      setTimeout(function () {
+        document.getElementById("id0003").value = ("フルネーム")
+        document.getElementById("id0003").style.background = "#FFCC66"
+      }, 2000);
       let fullNameString = document.getElementsByClassName('table table-sm table-bordered')[0].textContent
       result = fullNameString.match(/姓名（ふりがな）(.*)\s[（(]/);
-            if (result != null) {
+      if (result != null) {
         let clientname1 = (result[1]);
         //合致内容があればresultに格納
         if (navigator.clipboard) {
@@ -204,25 +204,23 @@ if (mwurl.match(/^(?=.*partyparty.jp)(?=.*members)(?=.*admin)/)) {
         }
       }
     }));;
-      $('th.background-lightgray:eq(2)').append($('<input type="button" id="id0001" value="苗字" style="width:50px;height:27px;font-size:8px;background:#00CC33;" >').click(function () {
+    $('th.background-lightgray:eq(2)').append($('<input type="button" id="id0001" value="苗字" style="width:50px;height:27px;font-size:8px;background:#00CC33;" >').click(function () {
       document.getElementById("id0001").value = "copy済"
       document.getElementById("id0001").style.background = "#CCCCCC"
-          setTimeout( function() {
-    document.getElementById("id0001").value = ("苗字")
-      document.getElementById("id0001").style.background = "#00CC33"
-}, 2000 );
+      setTimeout(function () {
+        document.getElementById("id0001").value = ("苗字")
+        document.getElementById("id0001").style.background = "#00CC33"
+      }, 2000);
       var tagetString = document.getElementsByClassName('table table-sm table-bordered')[0].textContent
-      var separatorString = /\s+/;
-      var arrayStrig = tagetString.split(separatorString);
-      let rinzi = arrayStrig[0];
-      result = rinzi.match(/姓名（ふりがな）(.*)/);
+      result = tagetString.match(/姓名（ふりがな）(.*)\s[（(]/);
+       result = result[1].split(/\s+/);
+          console.log(result[0]);
       if (result != null) {
-        let clientname1 = (result[1]);
+        let clientname1 = (result[0]);
         //合致内容があればresultに格納
         if (navigator.clipboard) {
           navigator.clipboard.writeText(clientname1);
           //格納をコピー
-          console.log(clientname1);
         }
       }
     }));;

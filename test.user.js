@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         test
 // @namespace    http://tampermonkey.net/
-// @version      0.16030
+// @version      0.16031
 // @description  try to take over the world!
 // @author       yamatohagi
 // @match        https://*/*
@@ -45,72 +45,13 @@ if (mwurl.match(/^(?=.*MailView)(?=.*japan)/)) {
     clientSearchButton();
   }));;
   /////--------------------------------------------------------------------------------------------------------------------返信内容表示********************************************************************************
-  $('#commonColumnTop td:eq(1)').prepend($('<input type="button" id="id31" value="返信" style="width:60px;height:25px;font-size:14px;background:#66CC33;" >'))
-  document.getElementById("id31").onclick = function () {
-    //変数宣言
-    var mailtext = '';
-    let urlget = new URL(window.location.href);
-    let params = urlget.searchParams;
-    let wid = params.get('wid')
-    let bs = params.get('bs')
-    let mid = params.get('mid')
-    let dbid = params.get('dbid')
-    let bpt = params.get('bpt')
-    //関数
-    function SendMaill() {
-      mailtext = mailtext.length > 1000 ? (mailtext).slice(0, 1000) + "…" : mailtext;
-      window.setTimeout(function () {
-        location.href = `https://ibjapan.cybozu.com/m/mw.cgi?page=MailSend&wid=${wid}&bs=${bs}&mid=${mid}&dbid=${dbid}&type=Received&bpt=${bpt}&clientMailAd=${clientMailAd}&mailtext=${mailtext}`;
-      }, 50);
-    }
-    if (document.getElementsByClassName('mailBody')[0].getElementsByTagName("div").length == 1) {
-      mailtext = document.getElementsByClassName('mailBody')[0].getElementsByTagName("div")[0].textContent.replace(/\r?\n/g, 'kaigyou');
-      onWrite(1, 0, 0);
-      SendMaill()
-    }
-    if (document.getElementsByClassName('re-content').length == 1) {
-      mailtext = document.getElementsByClassName('re-content')[0].textContent.replace(/\r?\n/g, 'kaigyou');
-      onWrite(1, 0, 0);
-      SendMaill()
-    }
-    if (document.getElementsByClassName('mailBody')[0].getElementsByTagName("tt").length == 1) {
-      mailtext = document.getElementsByClassName('mailBody')[0].getElementsByTagName("tt")[0].textContent.replace(/\r?\n/g, 'kaigyou');
-      onWrite(1, 0, 0);
-      SendMaill()
-    }
-  }
+
   /////--------------------------------------------------------------------------------------------------------------------返信内容表示*************************************************************************************
 }
 ///////////////////////////////////////////【MMMMWWWW】/////////////////////////////【MMMMWWWW】////////////////
+
 /////////////////////【MailSendMMMMWWWW】///////////////////////////////////////////////【MailSendMMMWWWW】///////////////////
-if (mwurl.match(/^(?=.*MailSend)(?=.*bjapan.cybozu.com)/)) {
-  //定形宣言
-  let $ = window.jQuery;
-  var urlget = new URL(window.location.href);
-  var params = urlget.searchParams;
-  var mailtext = params.get('mailtext')
-  var clientMailAd = params.get('clientMailAd')
-  mailtext = mailtext.replace(/kaigyou/g, '<br>');
-  $('tr:nth-child(6)').append($('<td>').append(`${mailtext}`));
-  $('tr:nth-child(5)').append($('<input type="button" id="id33" value="会員検索" style="width:100px;height:40px;font-size:20px;background:#FF66CC;" >').click(function () {
-    navigator.clipboard.writeText("ER");
-    document.getElementById("id33").value = ("copy済")
-    navigator.clipboard.writeText(clientMailAd);
-    setTimeout(function () {
-      const url = (atob("aHR0cHM6Ly93d3cucGFydHlwYXJ0eS5qcC9hZG1pbi9tZW1iZXJzP25hbWU9bXd0b2FkbWlu"));
-      window.open(url, '_blank');
-    }, 100);
-  }));
-  var abc = (clientMailAd);
-  let reg = new RegExp(abc);
-  if (document.getElementsByClassName('inputText')[0].value.match(/tickets.chatplus.jp|chatplus/)) {
-    document.getElementsByClassName('inputText')[0].value = (clientMailAd);
-    console.log(clientMailAd);
-  }
-  if (!document.getElementsByClassName('inputText')[0].value.match(reg)) {
-    alert('差出人と宛先に相違があります。ご注意ください')
-  }
-}
+
 //////////////////////【MailSendMMMMWWWW】//////////////////////////////【MailSendMMMMWWWW】////////////////
 
 //////////////////////////////////////////【mw to admin】//////////////////////////////////////【mw to admin】////////////////////////【mw to admin】////////////////////////【mw to admin】////////////////////////【mw to admin】////////////////

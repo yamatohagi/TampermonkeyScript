@@ -144,7 +144,7 @@ if (mwurl.match(/^(?=.*ty.jp)(?=.*members)(?=.*mwtoadmin)(?=.*admin)/)) {
           element = document.getElementById('member_search_freeword_target_1');
         }
         else {
-          if (value.match(/^[ぁ-んー　]*$/)) {  //"ー"の後ろの文字は全角スペースです。
+          if (value.match(/^[ぁ-んー　]*$/)) {  //"ー"の後ろの文字は全角スペースです。
             console.log("ひらがな");
             element = document.getElementById('member_search_freeword_target_4');
           }
@@ -257,7 +257,7 @@ if (mwurl.match(/^(?=.*ty.jp)(?=.*members)(?=.*admin)/)) {
           element = document.getElementById('member_search_freeword_target_1');
         }
         else {
-          if (value.match(/^[ぁ-んー　]*$/)) {  //"ー"の後ろの文字は全角スペースです。
+          if (value.match(/^[ぁ-んー　]*$/)) {  //"ー"の後ろの文字は全角スペースです。
             console.log("ひらがな");
             element = document.getElementById('member_search_freeword_target_4');
           }

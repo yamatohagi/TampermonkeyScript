@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         test
 // @namespace    http://tampermonkey.net/
-// @version      0.16031
+// @version      0.16032
 // @description  try to take over the world!
 // @author       yamatohagi
 // @match        https://*/*
@@ -61,11 +61,9 @@ if (mwurl.match(/^(?=.*ty.jp)(?=.*members)(?=.*mwtoadmin)(?=.*admin)/)) {
   let element = '';
   navigator.clipboard.readText().then((data) => {
     console.log("会員画面");
-    document.getElementById("member_search_freeword").value = data;
     document.getElementById('member_search_freeword').focus();
-  })
-  setTimeout(function () {
-    const value = document.getElementById("member_search_freeword").value;
+    document.getElementById("member_search_freeword").value = data;
+    const value = data;
     if (value.match(/@/)) {
       //valueに@を含む場合の処理
       console.log("mail");
@@ -97,7 +95,7 @@ if (mwurl.match(/^(?=.*ty.jp)(?=.*members)(?=.*mwtoadmin)(?=.*admin)/)) {
       }
     }
     element.checked = true;
-  }, 100);
+  })
 }
 //////////////////////////////////////////【mw to admin】//////////////////////////////////////【mw to admin】//////////////////////////////////////【mw to admin】//////////////////////////////////////【mw to admin】//////////////////////////////
 
@@ -175,7 +173,7 @@ if (mwurl.match(/^(?=.*ty.jp)(?=.*members)(?=.*admin)/)) {
     }));;
   }
   //////////______________________________________会員詳細情報画面のみ/////______________________________________会員詳細情報画面のみ/////______________________________________会員詳細情報画面のみ
-  document.getElementById("member_search_freeword").onchange = function () {
+  document.getElementById("member_search_freeword").oninput = function () {
     // onchangeイベントが発生した時の処理を記述する
     const value = document.getElementById("member_search_freeword").value;
 

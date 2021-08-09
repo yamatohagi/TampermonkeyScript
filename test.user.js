@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         test
 // @namespace    http://tampermonkey.net/
-// @version      0.16032
+// @version      0.16033
 // @description  try to take over the world!
 // @author       yamatohagi
 // @match        https://*/*
@@ -96,7 +96,10 @@ if (mwurl.match(/^(?=.*ty.jp)(?=.*members)(?=.*mwtoadmin)(?=.*admin)/)) {
     }
     element.checked = true;
   });
-}
+    setTimeout(function () {
+      document.getElementsByClassName('btn btn-default')[2].click()
+    }, 100);
+    }
 //////////////////////////////////////////【mw to admin】//////////////////////////////////////【mw to admin】//////////////////////////////////////【mw to admin】//////////////////////////////////////【mw to admin】//////////////////////////////
 
 //////////////////////////////////////////【admin】/////////////////////////////////////////////////【admin】/////////////////////////////////////////////////【admin】/////////////////////////////////////////////////【admin】//////////////////////////////
@@ -211,6 +214,17 @@ if (mwurl.match(/^(?=.*ty.jp)(?=.*members)(?=.*admin)/)) {
   }
 }
 //////////////////////////////////////////【admin】///////////////////////////////////////【admin】/////////////////////////////////////
+
+///////【member_search】/////////////【member_search】///////
+if (mwurl.match(/^(?=.*member_search)(?=.*members)(?=.*admin)/)) {
+    if (document.getElementsByClassName('text-center')[2].textContent == "該当の検索結果はありません"){
+    setTimeout(function () {
+      location.href = (atob("aHR0cHM6Ly93d3cucGFydHlwYXJ0eS5qcC9hZG1pbi9tZW1iZXJz"));
+    }, 500);
+    }
+
+}
+///////【member_search】/////////////【member_search】///////
 //////////////////////////////////////////【admin参加者のみ】///////////////////////////////////////////【admin参加者のみ】/////////////////////
 if (mwurl.match(/ties\/\d/)) {
   let $ = window.jQuery;

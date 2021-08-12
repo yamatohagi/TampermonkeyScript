@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         test
 // @namespace    http://tampermonkey.net/
-// @version      0.16034
+// @version      0.16035
 // @description  try to take over the world!
 // @author       yamatohagi
 // @match        https://*/*
@@ -287,4 +287,10 @@ if (mwurl.match(/\/admin\/parties\//)) {
     }, false);
   }
 }
-//////////////////////////////////////////【adminパーティーのみ】/////////////////////////////////////【adminパーティーのみ】/////////////////////////////【adminパーティーのみ】//////////////////////
+if (mwurl.match(/jp\/admin\//)) {//クリップボード対策
+  navigator.clipboard.readText().then((data) => {
+    var popo = data;
+    console.log(popo)
+  });
+}
+//////////////////////////////////////////【adminパーティーのみ】/////////////////////////////////////【adminパーティーのみ】////////////////////

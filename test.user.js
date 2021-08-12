@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         test
 // @namespace    http://tampermonkey.net/
-// @version      0.16033
+// @version      0.16034
 // @description  try to take over the world!
 // @author       yamatohagi
 // @match        https://*/*
@@ -259,6 +259,32 @@ if (mwurl.match(/ties\/\d/)) {
       //格納をコピー
       console.log(partyFB);
     }
+  }
+}
+//////////////////////////////////////////【adminPのみ】////////////////////////////////////////【adminPのみ】///////////////////
+if (mwurl.match(/\/admin\/parties\//)) {
+  var Pidclass = document.getElementsByClassName('party_id');
+  for (var pidi = 0; pidi < Pidclass.length; pidi++) {
+    Pidclass[pidi].addEventListener('click', function () {
+      var NUMPid = ($('.party_id').index(this))
+      var targetPid = document.getElementsByClassName('party_id')[NUMPid]
+      targetPid.style.background = '#00FF00';
+      setTimeout(() => {
+        targetPid.style.background = '';
+      }, 200);
+      navigator.clipboard.writeText(document.getElementsByClassName('party_id')[NUMPid].textContent);
+    }, false);
+    Pidclass[pidi].addEventListener('mouseover', function () {
+      var NUMPid = ($('.party_id').index(this))
+      var targetPid = document.getElementsByClassName('party_id')[NUMPid]
+      targetPid.style.background = '#FFFF33';
+    }, false);
+    Pidclass[pidi].addEventListener('mouseleave', function () {
+      var NUMPid = ($('.party_id').index(this))
+      var targetPid = document.getElementsByClassName('party_id')[NUMPid]
+      targetPid.style.background = '';
+
+    }, false);
   }
 }
 //////////////////////////////////////////【adminパーティーのみ】/////////////////////////////////////【adminパーティーのみ】/////////////////////////////【adminパーティーのみ】//////////////////////

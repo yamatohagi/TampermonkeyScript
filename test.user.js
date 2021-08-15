@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         test
 // @namespace    http://tampermonkey.net/
-// @version      0.16038
+// @version      0.16039
 // @description  try to take over the world!
 // @author       yamatohagi
 // @match        https://*/*
@@ -65,7 +65,6 @@ if (mwurl.match(/^(?=.*ty.jp)(?=.*members)(?=.*admin)(?=.*ykmshg)/)) {
 ///////////////////////【mw to ykmshg】/////////////////////////////////
 //////////////////////////////////////////【admin】/////////////////////////////////////////////////【admin】/////////////////////////////////////////////////【admin】/////////////////////////////////////////////////【admin】//////////////////////////////
 if (mwurl.match(/^(?=.*ty.jp)(?=.*members)(?=.*admin)/)) {
-    //定形宣言
     let $ = window.jQuery;
     let element = '';
     //////////______________________________________会員詳細情報画面のみ
@@ -78,12 +77,12 @@ if (mwurl.match(/^(?=.*ty.jp)(?=.*members)(?=.*admin)/)) {
                 document.getElementById("id001").style.background = "#3399FF"
             }, 2000);
             maillcopyclientfield = document.getElementsByClassName('table table-sm table-bordered')[0].textContent.match(/メールアドレス(.*)連絡用メールアドレス/)[1];
-            if (maillcopyclientfield != (null||'')) {
+            if (!(maillcopyclientfield == null || maillcopyclientfield == '')) {
                 navigator.clipboard.writeText(maillcopyclientfield);
                 console.log(maillcopyclientfield);
-            }else{
+            } else {
                 navigator.clipboard.writeText('ER');
-            }            
+            }
         }));;
         $('th.background-lightgray:eq(2)').append($('<input type="button" id="id0003" value="フルネーム" style="width:70px;height:27px;font-size:8px;background:#FFCC66;" >').click(function () {
             document.getElementById("id0003").style.background = "#CCCCCC"
@@ -91,52 +90,47 @@ if (mwurl.match(/^(?=.*ty.jp)(?=.*members)(?=.*admin)/)) {
                 document.getElementById("id0003").style.background = "#FFCC66"
             }, 2000);
             let fullNameString = document.getElementsByClassName('table table-sm table-bordered')[0].textContent.match(/姓名（ふりがな）(.*)\s[（(]/);
-            if (fullNameString[1] != null) {
-                    navigator.clipboard.writeText(fullNameString[1]);
-                    console.log(fullNameString[1]);
-            }else{
+            if (!(fullNameString == null || fullNameString == '')) {
+                navigator.clipboard.writeText(fullNameString[1]);
+                console.log(fullNameString[1]);
+            } else {
                 navigator.clipboard.writeText('ER');
-            }    
+            }
         }));;
         $('th.background-lightgray:eq(2)').append($('<input type="button" id="id0001" value="苗字" style="width:50px;height:27px;font-size:8px;background:#00CC33;" >').click(function () {
             document.getElementById("id0001").style.background = "#CCCCCC"
             setTimeout(function () {
                 document.getElementById("id0001").style.background = "#00CC33"
             }, 2000);
-            var tagetString = document.getElementsByClassName('table table-sm table-bordered')[0].textContent.match(/姓名（ふりがな）(.*)\s[（(]/)[1].split(/\s+/)[0];
-            if (tagetString != null) {
+            var tagetString = document.getElementsByClassName('table table-sm table-bordered')[0].textContent.match(/姓名（ふりがな）(.*)\s[（(]/);
+            if (!(tagetString == null || tagetString == '')) {
+                tagetString = tagetString[1].split(/\s+/)[0]
                 console.log(tagetString);
-                    navigator.clipboard.writeText(tagetString);
-            }else{
+                navigator.clipboard.writeText(tagetString);
+            } else {
                 navigator.clipboard.writeText('ER');
-            }    
+            }
         }));;
     }
     //////////______________________________________会員詳細情報画面のみ/////______________________________________会員詳細情報画面のみ/////______________________________________会員詳細情報画面のみ
     document.getElementById("member_search_freeword").oninput = function () {
-        // onchangeイベントが発生した時の処理を記述する
         const value = document.getElementById("member_search_freeword").value;
-
         if (value.match(/@/)) {
-            //valueに@を含む場合の処理
             console.log("mail");
-            //実行ボタン
             element = document.getElementById('member_search_freeword_target_2');
         }
         else {
             if (value.match(/^(0[5-9]0[0-9]{8}|0[1-9][1-9][0-9]{7})$/)) {
-                //valueにtelを含む場合の処理
                 console.log("tel");
                 element = document.getElementById('member_search_freeword_target_5');
             }
             else {
                 if (!isNaN(value)) {
-                    //valueに数値を含む場合の処理
                     console.log("kaiin");
                     element = document.getElementById('member_search_freeword_target_1');
                 }
                 else {
-                    if (value.match(/^[ぁ-んー　]*$/)) {  //"ー"の後ろの文字は全角スペースです。
+                    if (value.match(/^[ぁ-んー　]*$/)) {  //"ー"の後ろの文字は全角スペース
                         console.log("ひらがな");
                         element = document.getElementById('member_search_freeword_target_4');
                     }
@@ -159,7 +153,6 @@ if (mwurl.match(/^(?=.*member_search)(?=.*members)(?=.*admin)/)) {
             location.href = (atob("aHR0cHM6Ly93d3cucGFydHlwYXJ0eS5qcC9hZG1pbi9tZW1iZXJz"));
         }, 500);
     }
-
 }
 ///////【member_search】/////////////【member_search】///////
 //////////////////////////////////////////【admin参加者のみ】///////////////////////////////////////////【admin参加者のみ】/////////////////////
@@ -221,7 +214,6 @@ if (mwurl.match(/\/admin\/parties\//)) {
             var NUMPid = ($('.party_id').index(this))
             var targetPid = document.getElementsByClassName('party_id')[NUMPid]
             targetPid.style.background = '';
-
         }, false);
     }
 }

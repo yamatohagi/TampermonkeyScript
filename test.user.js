@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         test
 // @namespace    http://tampermonkey.net/
-// @version      0.16039
+// @version      0.16040
 // @description  try to take over the world!
 // @author       yamatohagi
 // @match        https://*/*
@@ -155,66 +155,85 @@ if (mwurl.match(/^(?=.*member_search)(?=.*members)(?=.*admin)/)) {
     }
 }
 ///////【member_search】/////////////【member_search】///////
-//////////////////////////////////////////【admin参加者のみ】///////////////////////////////////////////【admin参加者のみ】/////////////////////
-if (mwurl.match(/ties\/\d/)) {
-    let $ = window.jQuery;
-    $('div.col-sm-7.text-left').append($('<div>').append('<input type="button" id="id23" value="ID含めコピー" style="width:100px;height:30px;font-size:14px;background:#00CCFF;" >').append('<input type="button" id="id22" value="パーティー名コピー" style="width:140px;height:30px;font-size:14px;background:#00CCFF;" >'))
-    document.getElementById("id22").onclick = function () {
-        document.getElementById("id22").style.background = "#CCCCCC"
-        setTimeout(function () {
-            document.getElementById("id22").value = ("パーティー名コピー")
-            document.getElementById("id22").style.background = "#00CCFF"
-        }, 2000);
-        var partyF = document.getElementsByClassName('party_floor span-separate-sentences')[0].textContent
-        var partyB = document.getElementsByClassName('party_start_at')[0].textContent
-        var partyFB = (partyF + partyB);
-        if (navigator.clipboard) {
-            navigator.clipboard.writeText(partyFB);
-            //格納をコピー
-            console.log(partyFB);
-        }
-    }
-    document.getElementById("id23").onclick = function () {
-        document.getElementById("id23").style.background = "#CCCCCC"
-        setTimeout(function () {
-            document.getElementById("id23").value = ("ID含めコピー")
-            document.getElementById("id23").style.background = "#00CCFF"
-        }, 2000);
-        var partyID = document.getElementsByClassName('party_id')[0].textContent
-        var partyF = document.getElementsByClassName('party_floor span-separate-sentences')[0].textContent
-        var partyB = document.getElementsByClassName('party_start_at')[0].textContent
-        var partyFB = (partyID + ' ' + partyF + ' ' + partyB);
-        if (navigator.clipboard) {
-            navigator.clipboard.writeText(partyFB);
-            //格納をコピー
-            console.log(partyFB);
-        }
-    }
-}
-//////////////////////////////////////////【adminPのみ】////////////////////////////////////////【adminPのみ】///////////////////
 if (mwurl.match(/\/admin\/parties\//)) {
     let $ = window.jQuery;
-    var Pidclass = document.getElementsByClassName('party_id');
-    for (var pidi = 0; pidi < Pidclass.length; pidi++) {
-        Pidclass[pidi].addEventListener('click', function () {
-            var NUMPid = ($('.party_id').index(this))
-            var targetPid = document.getElementsByClassName('party_id')[NUMPid]
-            targetPid.style.background = '#00FF00';
-            setTimeout(() => {
-                targetPid.style.background = '';
-            }, 200);
-            navigator.clipboard.writeText(document.getElementsByClassName('party_id')[NUMPid].textContent);
+    var full = document.getElementsByClassName('col-sm-7 text-left')
+    var noId1 = document.getElementsByClassName('party_floor span-separate-sentences')
+    var noId2 = document.getElementsByClassName('party_start_at')
+    var idinp1 = document.getElementsByClassName('party_id')
+    var idinp2 = document.getElementsByClassName('party_floor span-separate-sentences')
+    var idinp3 = document.getElementsByClassName('party_start_at')
+    var party_id = document.getElementsByClassName('party_id')
+    for (var pidi = 0; pidi < full.length; pidi++) {
+        var prime_minister_list = document.getElementsByClassName('col-sm-7 text-left')[pidi]
+        var before = document.getElementsByClassName('col-sm-7 text-left')[pidi].innerHTML
+        prime_minister_list.innerHTML = `<button type='button' class='allinbutton' style="background:#FFFFAA;">AllCopy</button>${before}`
+        full[pidi].addEventListener('mouseover', function (e) {
+            var NUMPid = ($('.col-sm-7.text-left').index(this))
+            console.log(NUMPid)
+            switch (e.target.className) {
+                case 'party_floor span-separate-sentences':
+                    noId1[NUMPid].style.background = '#66CCFF';
+                    noId2[NUMPid].style.background = '#66CCFF';
+                    break;
+                case 'allinbutton':
+                    idinp1[NUMPid].style.background = '#FFFFAA';
+                    idinp2[NUMPid].style.background = '#FFFFAA';
+                    idinp3[NUMPid].style.background = '#FFFFAA';
+                    break;
+                case 'party_id':
+                    party_id[NUMPid].style.background = '#FF97C2';
+                    break;
+                default:
+                    console.log('住所はその他です');
+            }
         }, false);
-        Pidclass[pidi].addEventListener('mouseover', function () {
-            var NUMPid = ($('.party_id').index(this))
-            var targetPid = document.getElementsByClassName('party_id')[NUMPid]
-            targetPid.style.background = '#FFFF33';
-        }, false);
-        Pidclass[pidi].addEventListener('mouseleave', function () {
-            var NUMPid = ($('.party_id').index(this))
-            var targetPid = document.getElementsByClassName('party_id')[NUMPid]
-            targetPid.style.background = '';
-        }, false);
+        full[pidi].addEventListener('mouseout', function (e) {
+            var NUMPid = ($('.col-sm-7.text-left').index(this))
+            console.log(NUMPid)
+            switch (e.target.className) {
+                case 'party_floor span-separate-sentences':
+                    noId1[NUMPid].style.background = '';
+                    noId2[NUMPid].style.background = '';
+                    break;
+                case 'allinbutton':
+                    idinp1[NUMPid].style.background = '';
+                    idinp2[NUMPid].style.background = '';
+                    idinp3[NUMPid].style.background = '';
+                    break;
+                case 'party_id':
+                    party_id[NUMPid].style.background = '';
+                    break;
+                default:
+                    console.log('住所はその他です');
+            }
+        })
+        full[pidi].addEventListener('click', function (e) {
+            var NUMPid = ($('.col-sm-7.text-left').index(this))
+            console.log(NUMPid)
+            switch (e.target.className) {
+                case 'party_floor span-separate-sentences':
+                    navigator.clipboard.writeText(noId1[NUMPid].textContent + noId2[NUMPid].textContent);
+                    console.log(noId1[NUMPid].textContent + noId2[NUMPid].textContent)
+                    noId1[NUMPid].style.background = '#33FF99';
+                    noId2[NUMPid].style.background = '#33FF99';
+                    break;
+                case 'allinbutton':
+                    navigator.clipboard.writeText(idinp1[NUMPid].textContent + idinp2[NUMPid].textContent + idinp3[NUMPid].textContent)
+                    console.log(idinp1.textContent + idinp2[NUMPid].textContent + idinp3[NUMPid].textContent)
+                    idinp1[NUMPid].style.background = '#33FF99';
+                    idinp2[NUMPid].style.background = '#33FF99';
+                    idinp3[NUMPid].style.background = '#33FF99';
+                    break;
+                case 'party_id':
+                    navigator.clipboard.writeText(party_id[NUMPid].textContent)
+                    console.log(party_id[NUMPid].textContent)
+                    party_id[NUMPid].style.background = '#33FF99';
+                    break;
+                default:
+                    console.log('住所はその他です');
+            }
+        })
     }
 }
 //////////////////////////////////////////【adminパーティーのみ】/////////////////////////////////////【adminパーティーのみ】////////////////////

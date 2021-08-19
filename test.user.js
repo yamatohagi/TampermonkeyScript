@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         test
 // @namespace    http://tampermonkey.net/
-// @version      0.16040
+// @version      0.16041
 // @description  try to take over the world!
 // @author       yamatohagi
 // @match        https://*/*
@@ -178,6 +178,7 @@ if (mwurl.match(/\/admin\/parties\//)) {
                     break;
                 case 'allinbutton':
                     idinp1[NUMPid].style.background = '#FFFFAA';
+                    full[NUMPid].getElementsByTagName('span')[1].style.backgroundColor = '#FFFFAA';
                     idinp2[NUMPid].style.background = '#FFFFAA';
                     idinp3[NUMPid].style.background = '#FFFFAA';
                     break;
@@ -198,6 +199,7 @@ if (mwurl.match(/\/admin\/parties\//)) {
                     break;
                 case 'allinbutton':
                     idinp1[NUMPid].style.background = '';
+                    full[NUMPid].getElementsByTagName('span')[1].style.backgroundColor = '';
                     idinp2[NUMPid].style.background = '';
                     idinp3[NUMPid].style.background = '';
                     break;
@@ -213,15 +215,16 @@ if (mwurl.match(/\/admin\/parties\//)) {
             console.log(NUMPid)
             switch (e.target.className) {
                 case 'party_floor span-separate-sentences':
-                    navigator.clipboard.writeText(noId1[NUMPid].textContent + noId2[NUMPid].textContent);
+                    navigator.clipboard.writeText(noId1[NUMPid].textContent + ' ' + noId2[NUMPid].textContent);
                     console.log(noId1[NUMPid].textContent + noId2[NUMPid].textContent)
                     noId1[NUMPid].style.background = '#33FF99';
                     noId2[NUMPid].style.background = '#33FF99';
                     break;
                 case 'allinbutton':
-                    navigator.clipboard.writeText(idinp1[NUMPid].textContent + idinp2[NUMPid].textContent + idinp3[NUMPid].textContent)
-                    console.log(idinp1.textContent + idinp2[NUMPid].textContent + idinp3[NUMPid].textContent)
+                    navigator.clipboard.writeText(idinp1[NUMPid].textContent + ' ' + full[NUMPid].getElementsByTagName('span')[1].textContent + ' ' + idinp2[NUMPid].textContent + ' ' + idinp3[NUMPid].textContent)
+                    console.log(idinp1[NUMPid].textContent + full[NUMPid].getElementsByTagName('span')[1].textContent + idinp2[NUMPid].textContent + idinp3[NUMPid].textContent)
                     idinp1[NUMPid].style.background = '#33FF99';
+                    full[NUMPid].getElementsByTagName('span')[1].style.backgroundColor = '#33FF99';
                     idinp2[NUMPid].style.background = '#33FF99';
                     idinp3[NUMPid].style.background = '#33FF99';
                     break;

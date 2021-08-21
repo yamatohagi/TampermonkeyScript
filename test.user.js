@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         test
 // @namespace    http://tampermonkey.net/
-// @version      0.16041
+// @version      0.16042
 // @description  try to take over the world!
 // @author       yamatohagi
 // @match        https://*/*
@@ -69,7 +69,7 @@ if (mwurl.match(/^(?=.*ty.jp)(?=.*members)(?=.*admin)/)) {
     let element = '';
     //////////______________________________________会員詳細情報画面のみ
     let maillcopyclientfield = '';
-    if (document.querySelector("body > div > h2").textContent.match(/会員詳細情報/)) {
+    if (document.querySelector("body > div > h2").textContent == '会員詳細情報') {
         console.log("会員詳細情報が実行されています");
         $('th.background-lightgray:eq(6)').append($('<input type="button" id="id001" value="メアドコピー" style="width:80px;height:25px;font-size:8px;background:#3399FF;" >').click(function () {
             document.getElementById("id001").style.background = "#CCCCCC"

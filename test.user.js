@@ -66,7 +66,7 @@ if (mwurl.match(/^(?=.*MailSend)(?=.*japan)/)) {
                 addressmaill = data.match(/comand\+(.*?)\+/)[1]
                 console.log(setNameMaill)
                 console.log(addressmaill)
-                var maillAll = document.getElementById("mailsend_data").textContent
+                var maillAll = document.getElementById("mailsend_data").value
                 document.getElementById("mailsend_data").value = maillAll.replace(/(.*)(?=様)/, `${setNameMaill} `);
                 document.getElementsByClassName("inputText")[0].value = addressmaill
             } else {

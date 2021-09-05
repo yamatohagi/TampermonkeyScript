@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         test
 // @namespace    http://tampermonkey.net/
-// @version      0.16044
+// @version      0.16045
 // @description  try to take over the world!
 // @author       yamatohagi
 // @match        https://*/*
@@ -74,12 +74,30 @@ if (mwurl.match(/^(?=.*MailSend)(?=.*japan)/)) {
             }
         });
     };
-    $('.mailsend-selectStatus').eq(0).append($('<input type="button" id="id01199" value="メアド＆苗字" style="width:110px;height:30px;font-size:15px;background:#FF6633;" >').click(function () {
+        function paName() {
+        navigator.clipboard.readText().then((data) => {
+            if (data.match(/^(?=.*～)/)) {
+                var maillAll = document.getElementById("mailsend_data").value
+                document.getElementById("mailsend_data").value = maillAll.replace(/【(.*?)】/, `【${data}】 `);
+                document.getElementsByClassName("inputText")[0].value = addressmaill
+            } else {
+                alert("エラー\nこのボタンを使用するにはパーティー名をコピーした直後に使用してください")
+            }
+        });
+    };
+        $('.mailsend-selectStatus').eq(0).append($('<input type="button" id="id01199" value="メアド＆苗字" style="width:110px;height:30px;font-size:15px;background:#FF6633;" >').click(function () {
         document.getElementById("id01199").style.background = "#CCCCCC"
         setTimeout(function () {
             document.getElementById("id01199").style.background = "#FF6633"
         }, 2000);
         NameAndMaill()
+    }));
+    $('.mailsend-selectStatus').eq(0).append($('<input type="button" id="id01192" value="【PatyName】" style="width:110px;height:30px;font-size:15px;background:#66CCFF;" >').click(function () {
+        document.getElementById("id01192").style.background = "#CCCCCC"
+        setTimeout(function () {
+            document.getElementById("id01192").style.background = "#66CCFF"
+        }, 2000);
+        paName()
     }));
 }
 
@@ -98,7 +116,7 @@ if (mwurl.match(/^(?=.*ty.jp)(?=.*members)(?=.*admin)/)) {
     let maillcopyclientfield = '';
     if (document.querySelector("body > div > h2").textContent == '会員詳細情報') {
         console.log("会員詳細情報が実行されています");
-        $('th.background-lightgray:eq(6)').append($('<input type="button" id="id001" value="メアドコピー" style="width:80px;height:25px;font-size:8px;background:#3399FF;" >').click(function () {
+        $('th.background-lightgray:eq(6)').append($('<input type="button" id="id001" value="メアドコピー" style="width:80px;height:27px;font-size:8px;background:#3399FF;" >').click(function () {
             document.getElementById("id001").style.background = "#CCCCCC"
             setTimeout(function () {
                 document.getElementById("id001").style.background = "#3399FF"
@@ -138,7 +156,7 @@ if (mwurl.match(/^(?=.*ty.jp)(?=.*members)(?=.*admin)/)) {
                 navigator.clipboard.writeText('ER');
             }
         }));;
-        $('th.background-lightgray:eq(6)').append($('<input type="button" id="id0016" value="メアド＆苗字" style="width:100px;height:25px;font-size:14px;background:#FF6633;" >').click(function () {
+        $('th.background-lightgray:eq(6)').append($('<input type="button" id="id0016" value="メアド＆苗字" style="width:80px;height:27px;font-size:10px;background:#FF6633;" >').click(function () {
             document.getElementById("id0016").style.background = "#CCCCCC"
             setTimeout(function () {
                 document.getElementById("id0016").style.background = "#FF6633"
@@ -288,3 +306,4 @@ if (mwurl.match(/\/admin\/parties\//)) {
     }
 }
 //////////////////////////////////////////【adminパーティーのみ】/////////////////////////////////////【adminパーティーのみ】////////////////////
+

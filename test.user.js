@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         test
 // @namespace    http://tampermonkey.net/
-// @version      0.16045
+// @version      0.16046
 // @description  try to take over the world!
 // @author       yamatohagi
 // @match        https://*/*
@@ -74,7 +74,7 @@ if (mwurl.match(/^(?=.*MailSend)(?=.*japan)/)) {
             }
         });
     };
-        function paName() {
+    function paName() {
         navigator.clipboard.readText().then((data) => {
             if (data.match(/^(?=.*～)/)) {
                 var maillAll = document.getElementById("mailsend_data").value
@@ -85,7 +85,7 @@ if (mwurl.match(/^(?=.*MailSend)(?=.*japan)/)) {
             }
         });
     };
-        $('.mailsend-selectStatus').eq(0).append($('<input type="button" id="id01199" value="メアド＆苗字" style="width:110px;height:30px;font-size:15px;background:#FF6633;" >').click(function () {
+    $('.mailsend-selectStatus').eq(0).append($('<input type="button" id="id01199" value="メアド＆苗字" style="width:110px;height:30px;font-size:15px;background:#FF6633;" >').click(function () {
         document.getElementById("id01199").style.background = "#CCCCCC"
         setTimeout(function () {
             document.getElementById("id01199").style.background = "#FF6633"
@@ -252,7 +252,7 @@ if (mwurl.match(/\/admin\/parties\//)) {
                     party_id[NUMPid].style.background = '#FF97C2';
                     break;
                 default:
-                    console.log('住所はその他です');
+                    console.log('選択ポイントはその他です。');
             }
         }, false);
         full[pidi].addEventListener('mouseout', function (e) {
@@ -273,7 +273,7 @@ if (mwurl.match(/\/admin\/parties\//)) {
                     party_id[NUMPid].style.background = '';
                     break;
                 default:
-                    console.log('住所はその他です');
+                    console.log('選択ポイントはその他です。');
             }
         })
         full[pidi].addEventListener('click', function (e) {
@@ -300,10 +300,56 @@ if (mwurl.match(/\/admin\/parties\//)) {
                     party_id[NUMPid].style.background = '#33FF99';
                     break;
                 default:
-                    console.log('住所はその他です');
+                    console.log('選択ポイントはその他です。');
+            }
+        })
+        full[pidi].addEventListener('dblclick', function (e) {
+            var NUMPid = ($('.col-sm-7.text-left').index(this))
+            console.log(NUMPid)
+            switch (e.target.className) {
+                case 'allinbutton':
+                    var joinman = document.getElementsByClassName('capacity_man')[NUMPid].previousElementSibling.textContent
+                    var joinwoman = document.getElementsByClassName('capacity_woman')[NUMPid].previousElementSibling.textContent
+                    var kikakunum = document.getElementsByClassName('row party-frame')[NUMPid].textContent.match(/\d+(?=対)/)
+                    var womanAge = document.getElementsByClassName('row party-frame')[NUMPid].textContent.match(/(?<=年齢・条件\（女性\）\d+[〜～])\d+(?=歳)/)
+                    var womanJsPass = document.querySelector(`#edit_party_${party_id[NUMPid].textContent} > table > tbody > tr:nth-child(10) > td:nth-child(2) > div`).innerHTML.match(/(.*?)(?=<br>)/)[0]
+                    womanAge = womanAge || womanJsPass;
+
+                    navigator.clipboard.writeText(`${idinp1[NUMPid].textContent} ${full[NUMPid].getElementsByTagName('span')[1].textContent} ${idinp2[NUMPid].textContent} ${idinp3[NUMPid].textContent} ${joinman}-${joinwoman}(${kikakunum}-${kikakunum}) ${womanAge}`)
+                    idinp1[NUMPid].style.background = '#ff0000';
+                    full[NUMPid].getElementsByTagName('span')[1].style.backgroundColor = '#ff0000';
+                    idinp2[NUMPid].style.background = '#ff0000';
+                    idinp3[NUMPid].style.background = '#ff0000';
+                    console.log('iiyoooooo')
+                    break;
+                default:
+                    console.log('選択ポイントはその他です。');
             }
         })
     }
 }
 //////////////////////////////////////////【adminパーティーのみ】/////////////////////////////////////【adminパーティーのみ】////////////////////
+if (mwurl.match(/^(?=.*parties)(?=.*search)/)) {
+    $('.text-left:eq(0)').append($('<input type="button" id="id001102" value="凄いボタン" style="width:80px;height:27px;font-size:10px;background:#FF6633;" >').click(function () {
+        var NameAndjoinnum = []
+        for (var pidi = 0; pidi < document.getElementsByClassName('col-sm-7 text-left').length; pidi++) {
+            var testPspan = document.getElementsByClassName('col-sm-7 text-left')[pidi].getElementsByTagName('span')[1].textContent
+            var cusidinp1 = document.getElementsByClassName('party_id')[pidi].textContent
+            var cusidinp2 = document.getElementsByClassName('party_floor span-separate-sentences')[pidi].textContent
+            var cusidinp3 = document.getElementsByClassName('party_start_at')[pidi].textContent
+            var cusparty_id = document.getElementsByClassName('party_id')[pidi].textContent
+
+            var kikakunum = document.getElementsByClassName('table table-sm table-bordered')[pidi].textContent.match(/\d+(?=対)/)
+            var joinman = document.getElementsByClassName('capacity_man')[pidi].previousElementSibling.textContent
+            var joinwoman = document.getElementsByClassName('capacity_woman')[pidi].previousElementSibling.textContent
+            var womanAge = document.getElementsByClassName('table table-sm table-bordered')[pidi].textContent.match(/(?<=年齢・条件\（女性\）\d+[〜～])\d+(?=歳)/)
+            var womanJsPass = document.querySelector(`#edit_party_${cusparty_id} > table > tbody > tr:nth-child(10) > td:nth-child(2) > div`).innerHTML.match(/(.*?)(?=<br>)/)[0]
+            womanAge = womanAge || womanJsPass;
+
+            NameAndjoinnum.push(`${cusidinp1} ${testPspan} ${cusidinp2} ${cusidinp3} ${joinman}-${joinwoman}(${kikakunum}-${kikakunum}) ${womanAge}`);
+        }
+        console.log(NameAndjoinnum.join('\n'));
+        navigator.clipboard.writeText(NameAndjoinnum.join('\n'));
+    }))
+}
 

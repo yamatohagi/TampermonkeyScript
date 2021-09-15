@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         test
 // @namespace    http://tampermonkey.net/
-// @version      0.16046
+// @version      0.16047
 // @description  try to take over the world!
 // @author       yamatohagi
 // @match        https://*/*
@@ -330,7 +330,7 @@ if (mwurl.match(/\/admin\/parties\//)) {
 }
 //////////////////////////////////////////【adminパーティーのみ】/////////////////////////////////////【adminパーティーのみ】////////////////////
 if (mwurl.match(/^(?=.*parties)(?=.*search)/)) {
-    $('.text-left:eq(0)').append($('<input type="button" id="id001102" value="凄いボタン" style="width:80px;height:27px;font-size:10px;background:#FF6633;" >').click(function () {
+    $('.text-left:eq(0)').append($('<input type="button" id="id001102" value="凄いボタン" style="width:80px;height:27px;font-size:13px;background:#FF6633;" >').click(function () {
         var NameAndjoinnum = []
         for (var pidi = 0; pidi < document.getElementsByClassName('col-sm-7 text-left').length; pidi++) {
             var testPspan = document.getElementsByClassName('col-sm-7 text-left')[pidi].getElementsByTagName('span')[1].textContent

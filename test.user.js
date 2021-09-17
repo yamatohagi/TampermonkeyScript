@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         test
 // @namespace    http://tampermonkey.net/
-// @version      0.16047
+// @version      0.16048
 // @description  try to take over the world!
 // @author       yamatohagi
 // @match        https://*/*
@@ -115,6 +115,7 @@ if (mwurl.match(/^(?=.*ty.jp)(?=.*members)(?=.*admin)/)) {
     //////////______________________________________会員詳細情報画面のみ
     let maillcopyclientfield = '';
     if (document.querySelector("body > div > h2").textContent == '会員詳細情報') {
+        document.title = "【会員情報】";//タブ名
         console.log("会員詳細情報が実行されています");
         $('th.background-lightgray:eq(6)').append($('<input type="button" id="id001" value="メアドコピー" style="width:80px;height:27px;font-size:8px;background:#3399FF;" >').click(function () {
             document.getElementById("id001").style.background = "#CCCCCC"
@@ -329,7 +330,54 @@ if (mwurl.match(/\/admin\/parties\//)) {
     }
 }
 //////////////////////////////////////////【adminパーティーのみ】/////////////////////////////////////【adminパーティーのみ】////////////////////
-if (mwurl.match(/^(?=.*parties)(?=.*search)/)) {
+if (mwurl.match(/\/admin\/parties/)) {
+    if (location.pathname == '/admin/parties') {
+        document.title = '【PT検索】'
+    }
+    if (mwurl.match(/^(?=.*admin)(?=.*parties)(?=.*edit)/)) {
+        console.log('ikite')
+        var editHour = document.getElementById('party_start_at_hour').value
+        var editMin = document.getElementById('party_start_at_min').value
+        if (editMin == 0) {
+            editMin = '00'
+        }
+        var editDay = document.getElementById('start_at_date').value.slice(-5)
+
+        document.title = `【PT編集画面】${editDay} ${editHour} : ${editMin}`;
+    }
+}
+if (mwurl.match(/\/admin\/members/)) {
+    if (location.pathname == '/admin/members') {
+        document.title = '【会員検索】'
+    }
+}
+
+if (mwurl.match(/\/admin\/parties\/\d/)) {
+    var ptspot = document.getElementsByClassName('col-sm-7 text-left')[0].getElementsByTagName('span')[1].textContent
+    var daytimeF = document.getElementsByClassName('party_start_at')[0].textContent.match(/\d{2}(?=:)/)
+    var daytimeB = document.getElementsByClassName('party_start_at')[0].textContent.match(/(?<=:)\d{2}/)
+    document.title = `【参加者一覧】[${daytimeF} : ${daytimeB}] ${ptspot}`;//タブ名
+}
+if (mwurl.match(/^(?=.*admin)(?=.*smartdevice_parties)/)) {
+    var ProgressdaytimeF = document.getElementsByClassName('container mb-30')[0].textContent.match(/\d{2}(?=:)/)
+    var ProgressdaytimeB = document.getElementsByClassName('container mb-30')[0].textContent.match(/(?<=:)\d{2}/)
+    document.title = `【進行画面】[${ProgressdaytimeF} : ${ProgressdaytimeB}]`;//タブ名
+}
+if (mwurl.match(/^(?=.*admin)(?=.*smart_parties)/)) {
+    var ProgressdaytimeSmartF = document.getElementsByClassName('container mb-30')[0].textContent.match(/\d{2}(?=:)/)
+    var ProgressdaytimeSmartB = document.getElementsByClassName('container mb-30')[0].textContent.match(/(?<=:)\d{2}/)
+    document.title = `【進行画面】[${ProgressdaytimeSmartF} : ${ProgressdaytimeSmartB}]`;//タブ名
+}
+if (mwurl.match(/^(?=.*admin)(?=.*parties)(?=.*search)/)) {
+    var periodfront = location.href.match(/(?<=admin_party_search%5Bfrom%5D=)(.*?)(?=&)/)
+    var periodYfront = periodfront[0].match(/\d{4}(?=%2F)/)
+    var periodMfront = periodfront[0].match(/(?<=%2F)(.*?)(?=%2F)/)
+    var periodDfront = periodfront[0].slice(-2)
+    var periodafter = location.href.match(/(?<=admin_party_search%5Bto%5D=)(.*?)(?=&)/)
+    var periodYafter = periodafter[0].match(/\d{4}(?=%2F)/)
+    var periodMafter = periodafter[0].match(/(?<=%2F)(.*?)(?=%2F)/)
+    var periodDafter = periodafter[0].slice(-2)
+    document.title = `【PT一覧】${periodMfront[0]}/${periodDfront}～${periodMafter[0]}/${periodDafter}`;//タブ名
     $('.text-left:eq(0)').append($('<input type="button" id="id001102" value="凄いボタン" style="width:80px;height:27px;font-size:13px;background:#FF6633;" >').click(function () {
         var NameAndjoinnum = []
         for (var pidi = 0; pidi < document.getElementsByClassName('col-sm-7 text-left').length; pidi++) {
@@ -352,4 +400,3 @@ if (mwurl.match(/^(?=.*parties)(?=.*search)/)) {
         navigator.clipboard.writeText(NameAndjoinnum.join('\n'));
     }))
 }
-

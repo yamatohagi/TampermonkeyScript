@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         test
 // @namespace    http://tampermonkey.net/
-// @version      0.16049
+// @version      0.16050
 // @description  try to take over the world!
 // @author       yamatohagi
 // @match        https://*/*
@@ -108,7 +108,40 @@ if (mwurl.match(/^(?=.*ty.jp)(?=.*members)(?=.*admin)(?=.*ykmshg)/)) {
     }
 }
 ///////////////////////【mw to ykmshg】/////////////////////////////////
-//////////////////////////////////////////【admin】/////////////////////////////////////////////////【admin】/////////////////////////////////////////////////【admin】/////////////////////////////////////////////////【admin】//////////////////////////////
+//////////////////////////////////////////【admin】/////////////////////////////////////////////////【admin】////////////////////////
+if (mwurl == 'https://www.partyparty.jp/admin/parties') {
+    var elementadmincheck = ''
+        document.getElementsByName('admin_party_search[freeword]')[1].oninput = function () {
+        const valueadmin = document.getElementsByName('admin_party_search[freeword]')[1].value;
+        if (valueadmin.match(/[0-9]{5,10}/)) {
+            console.log('id')
+            document.getElementsByName('admin_party_search[id]')[2].checked = true;
+        }
+        else {
+            if (valueadmin.match(/[｛｝〈〉《》「」『』【】＋－±×・～＼～∥｜…‥‘’“”（）〔〕]/)) {
+                console.log("タイトル");
+               document.getElementsByName('admin_party_search[title]')[2].checked = true;
+            }
+            else {
+                if (valueadmin.match(/[亜-黑]{1,4}/)) {
+                    console.log("感じ");
+                    document.getElementsByName('admin_party_search[location]')[2].checked = true;
+                    document.getElementsByName('admin_party_search[floor_name]')[2].checked = true;
+                }
+                else {
+                    if (valueadmin.match(/^[ぁ-んー　]*$/)) {  //"ー"の後ろの文字は全角スペース
+                        console.log("ひらがな");
+                    }
+                    else {
+                        console.log("その他漢字");
+
+                    }
+                }
+            }
+        }
+
+    }
+}
 if (mwurl.match(/^(?=.*ty.jp)(?=.*members)(?=.*admin)/)) {
     let $ = window.jQuery;
     let element = '';

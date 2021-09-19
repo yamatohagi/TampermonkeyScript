@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         test
 // @namespace    http://tampermonkey.net/
-// @version      0.16048
+// @version      0.16049
 // @description  try to take over the world!
 // @author       yamatohagi
 // @match        https://*/*
@@ -343,7 +343,7 @@ if (mwurl.match(/\/admin\/parties/)) {
         }
         var editDay = document.getElementById('start_at_date').value.slice(-5)
 
-        document.title = `【PT編集画面】${editDay} ${editHour} : ${editMin}`;
+        document.title = `【PT編集】${editDay} ${editHour} : ${editMin}`;
     }
 }
 if (mwurl.match(/\/admin\/members/)) {
@@ -356,17 +356,17 @@ if (mwurl.match(/\/admin\/parties\/\d/)) {
     var ptspot = document.getElementsByClassName('col-sm-7 text-left')[0].getElementsByTagName('span')[1].textContent
     var daytimeF = document.getElementsByClassName('party_start_at')[0].textContent.match(/\d{2}(?=:)/)
     var daytimeB = document.getElementsByClassName('party_start_at')[0].textContent.match(/(?<=:)\d{2}/)
-    document.title = `【参加者一覧】[${daytimeF} : ${daytimeB}] ${ptspot}`;//タブ名
+    document.title = `【参加者】[${daytimeF} : ${daytimeB}] ${ptspot}`;//タブ名
 }
 if (mwurl.match(/^(?=.*admin)(?=.*smartdevice_parties)/)) {
     var ProgressdaytimeF = document.getElementsByClassName('container mb-30')[0].textContent.match(/\d{2}(?=:)/)
     var ProgressdaytimeB = document.getElementsByClassName('container mb-30')[0].textContent.match(/(?<=:)\d{2}/)
-    document.title = `【進行画面】[${ProgressdaytimeF} : ${ProgressdaytimeB}]`;//タブ名
+    document.title = `【進行】[${ProgressdaytimeF} : ${ProgressdaytimeB}]`;//タブ名
 }
 if (mwurl.match(/^(?=.*admin)(?=.*smart_parties)/)) {
     var ProgressdaytimeSmartF = document.getElementsByClassName('container mb-30')[0].textContent.match(/\d{2}(?=:)/)
     var ProgressdaytimeSmartB = document.getElementsByClassName('container mb-30')[0].textContent.match(/(?<=:)\d{2}/)
-    document.title = `【進行画面】[${ProgressdaytimeSmartF} : ${ProgressdaytimeSmartB}]`;//タブ名
+    document.title = `【進行】[${ProgressdaytimeSmartF} : ${ProgressdaytimeSmartB}]`;//タブ名
 }
 if (mwurl.match(/^(?=.*admin)(?=.*parties)(?=.*search)/)) {
     var periodfront = location.href.match(/(?<=admin_party_search%5Bfrom%5D=)(.*?)(?=&)/)

@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         test
 // @namespace    http://tampermonkey.net/
-// @version      0.16050
+// @version      0.16051
 // @description  try to take over the world!
 // @author       yamatohagi
 // @match        https://*/*
@@ -106,40 +106,22 @@ if (mwurl.match(/^(?=.*ty.jp)(?=.*members)(?=.*admin)(?=.*ykmshg)/)) {
     if (document.getElementsByClassName('container mb-30')[0].textContent.match(/1件を表示/)) {
         document.querySelector("body > div.container.mb-30 > table > tbody > tr > td:nth-child(1) > a").click()
     }
+    if (document.getElementsByClassName('text-center')[2].textContent == "該当の検索結果はありません") {
+        setTimeout(function () {
+            location.href = (atob("aHR0cHM6Ly93d3cucGFydHlwYXJ0eS5qcC9hZG1pbi9tZW1iZXJz"));
+        }, 500);
+    }
 }
 ///////////////////////【mw to ykmshg】/////////////////////////////////
 //////////////////////////////////////////【admin】/////////////////////////////////////////////////【admin】////////////////////////
 if (mwurl == 'https://www.partyparty.jp/admin/parties') {
     var elementadmincheck = ''
-        document.getElementsByName('admin_party_search[freeword]')[1].oninput = function () {
+    document.getElementsByName('admin_party_search[freeword]')[1].oninput = function () {
         const valueadmin = document.getElementsByName('admin_party_search[freeword]')[1].value;
         if (valueadmin.match(/[0-9]{5,10}/)) {
             console.log('id')
             document.getElementsByName('admin_party_search[id]')[2].checked = true;
         }
-        else {
-            if (valueadmin.match(/[｛｝〈〉《》「」『』【】＋－±×・～＼～∥｜…‥‘’“”（）〔〕]/)) {
-                console.log("タイトル");
-               document.getElementsByName('admin_party_search[title]')[2].checked = true;
-            }
-            else {
-                if (valueadmin.match(/[亜-黑]{1,4}/)) {
-                    console.log("感じ");
-                    document.getElementsByName('admin_party_search[location]')[2].checked = true;
-                    document.getElementsByName('admin_party_search[floor_name]')[2].checked = true;
-                }
-                else {
-                    if (valueadmin.match(/^[ぁ-んー　]*$/)) {  //"ー"の後ろの文字は全角スペース
-                        console.log("ひらがな");
-                    }
-                    else {
-                        console.log("その他漢字");
-
-                    }
-                }
-            }
-        }
-
     }
 }
 if (mwurl.match(/^(?=.*ty.jp)(?=.*members)(?=.*admin)/)) {
@@ -247,13 +229,7 @@ if (mwurl.match(/^(?=.*ty.jp)(?=.*members)(?=.*admin)/)) {
 //////////////////////////////////////////【admin】///////////////////////////////////////【admin】/////////////////////////////////////
 
 ///////【member_search】/////////////【member_search】///////
-if (mwurl.match(/^(?=.*member_search)(?=.*members)(?=.*admin)/)) {
-    if (document.getElementsByClassName('text-center')[2].textContent == "該当の検索結果はありません") {
-        setTimeout(function () {
-            location.href = (atob("aHR0cHM6Ly93d3cucGFydHlwYXJ0eS5qcC9hZG1pbi9tZW1iZXJz"));
-        }, 500);
-    }
-}
+
 ///////【member_search】/////////////【member_search】///////
 if (mwurl.match(/\/admin\/parties\//)) {
     let $ = window.jQuery;
@@ -339,13 +315,13 @@ if (mwurl.match(/\/admin\/parties\//)) {
         })
         full[pidi].addEventListener('dblclick', function (e) {
             var NUMPid = ($('.col-sm-7.text-left').index(this))
-            console.log(NUMPid)
+            console.log('ダブル')
             switch (e.target.className) {
                 case 'allinbutton':
                     var joinman = document.getElementsByClassName('capacity_man')[NUMPid].previousElementSibling.textContent
                     var joinwoman = document.getElementsByClassName('capacity_woman')[NUMPid].previousElementSibling.textContent
                     var kikakunum = document.getElementsByClassName('row party-frame')[NUMPid].textContent.match(/\d+(?=対)/)
-                    var womanAge = document.getElementsByClassName('row party-frame')[NUMPid].textContent.match(/(?<=年齢・条件\（女性\）\d+[〜～])\d+(?=歳)/)
+                    var womanAge = document.getElementsByClassName('row party-frame')[NUMPid].textContent.match(/(?<=年齢・条件\（女性\）\d+[~〜～])\d+(?=歳)/)
                     var womanJsPass = document.querySelector(`#edit_party_${party_id[NUMPid].textContent} > table > tbody > tr:nth-child(10) > td:nth-child(2) > div`).innerHTML.match(/(.*?)(?=<br>)/)[0]
                     womanAge = womanAge || womanJsPass;
 
@@ -411,7 +387,7 @@ if (mwurl.match(/^(?=.*admin)(?=.*parties)(?=.*search)/)) {
     var periodMafter = periodafter[0].match(/(?<=%2F)(.*?)(?=%2F)/)
     var periodDafter = periodafter[0].slice(-2)
     document.title = `【PT一覧】${periodMfront[0]}/${periodDfront}～${periodMafter[0]}/${periodDafter}`;//タブ名
-    $('.text-left:eq(0)').append($('<input type="button" id="id001102" value="凄いボタン" style="width:80px;height:27px;font-size:13px;background:#FF6633;" >').click(function () {
+    $('.text-left:eq(0)').append($('<input type="button" id="id001102" value="Sボタン" style="width:80px;height:27px;font-size:13px;background:#FF6633;" >').click(function () {
         var NameAndjoinnum = []
         for (var pidi = 0; pidi < document.getElementsByClassName('col-sm-7 text-left').length; pidi++) {
             var testPspan = document.getElementsByClassName('col-sm-7 text-left')[pidi].getElementsByTagName('span')[1].textContent
@@ -423,7 +399,7 @@ if (mwurl.match(/^(?=.*admin)(?=.*parties)(?=.*search)/)) {
             var kikakunum = document.getElementsByClassName('table table-sm table-bordered')[pidi].textContent.match(/\d+(?=対)/)
             var joinman = document.getElementsByClassName('capacity_man')[pidi].previousElementSibling.textContent
             var joinwoman = document.getElementsByClassName('capacity_woman')[pidi].previousElementSibling.textContent
-            var womanAge = document.getElementsByClassName('table table-sm table-bordered')[pidi].textContent.match(/(?<=年齢・条件\（女性\）\d+[〜～])\d+(?=歳)/)
+            var womanAge = document.getElementsByClassName('table table-sm table-bordered')[pidi].textContent.match(/(?<=年齢・条件\（女性\）\d+[~〜～])\d+(?=歳)/)
             var womanJsPass = document.querySelector(`#edit_party_${cusparty_id} > table > tbody > tr:nth-child(10) > td:nth-child(2) > div`).innerHTML.match(/(.*?)(?=<br>)/)[0]
             womanAge = womanAge || womanJsPass;
 

@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         test
 // @namespace    http://tampermonkey.net/
-// @version      0.16051
+// @version      0.16052
 // @description  try to take over the world!
 // @author       yamatohagi
 // @match        https://*/*
@@ -124,6 +124,87 @@ if (mwurl == 'https://www.partyparty.jp/admin/parties') {
         }
     }
 }
+// <<<<<<<<<<<<<<<<<保存ボタン <<<<<<<<<<<<<<<<<保存ボタン <<<<<<<<<<<<<<<<<保存ボタン <<<<<<<<<<<<<<<<<
+if (mwurl == 'https://www.partyparty.jp/admin/parties') {
+    var ptSearchdate = new Date()
+    function getCookieNo1Array(getNo1) {
+        document.getElementsByClassName('form-control input-sm')[0].focus()
+        function getCookieArray() {
+            var arr = new Array();
+            if (document.cookie != '') {
+                var tmp = document.cookie.split('; ');
+                for (var i = 0; i < tmp.length; i++) {
+                    var data = tmp[i].split('=');
+                    arr[data[0]] = decodeURIComponent(data[1]);
+                }
+            }
+            return arr;
+        }
+
+        // keyを指定して取得
+        // 「 key1=val1; key2=val2; key3=val3; ・・・ 」というCookie情報が保存されているとする
+        var arrSelected = getCookieArray();
+        var cookieArr = arrSelected[getNo1];
+        var getFloorNumArr = cookieArr.split('+');
+        console.log(getFloorNumArr);
+        for (var initcheckFloorNum = 0; initcheckFloorNum < document.getElementsByClassName('sales_section_check_box').length; initcheckFloorNum++) {
+            document.getElementsByClassName('sales_section_check_box')[initcheckFloorNum].checked = false
+        }
+        for (var checkFloorNum = 0; checkFloorNum < getFloorNumArr.length; checkFloorNum++) {
+            var num = getFloorNumArr[checkFloorNum]
+            document.getElementsByClassName('sales_section_check_box')[num].checked = true
+        }
+
+    }
+    function settCookieNo1Array(saveNo1) {
+
+        var checkFloorNumAry = [];
+        var checkFloor = document.getElementsByClassName('sales_section_check_box')
+        for (var checkFloorNum = 0; checkFloorNum < checkFloor.length; checkFloorNum++) {
+            if (checkFloor[checkFloorNum].checked == true) {
+                checkFloorNumAry.push(checkFloorNum)
+            }
+
+        }
+
+        var checkFloorNumAryString = checkFloorNumAry.join('+');
+        var checkFloorNumAryStringSet = `${saveNo1}=${checkFloorNumAryString}`
+        console.log(checkFloorNumAryStringSet)
+        document.cookie = checkFloorNumAryStringSet
+    }
+    $('.col-sm-8:eq(1)').append($('<input type="button" id="id1156" value="今日" style="width:50px;height:27px;font-size:13px;background:#F08080;" >').click(function () {
+        document.getElementById('party_search_from').value = (`${ptSearchdate.getFullYear()}/${ptSearchdate.getMonth() + 1}/${ptSearchdate.getDate() + 0}`)
+        document.getElementById('party_search_to').value = (`${ptSearchdate.getFullYear()}/${ptSearchdate.getMonth() + 1}/${ptSearchdate.getDate() + 0}`)
+        document.getElementsByClassName('form-control input-sm')[0].focus()
+    }))
+    $('.col-sm-8:eq(1)').append($('<input type="button" id="id1156" value="明日" style="width:50px;height:27px;font-size:13px;background:#F08080;" >').click(function () {
+        document.getElementById('party_search_from').value = (`${ptSearchdate.getFullYear()}/${ptSearchdate.getMonth() + 1}/${ptSearchdate.getDate() + 1}`)
+        document.getElementById('party_search_to').value = (`${ptSearchdate.getFullYear()}/${ptSearchdate.getMonth() + 1}/${ptSearchdate.getDate() + 1}`)
+        document.getElementsByClassName('form-control input-sm')[0].focus()
+    }))
+    $('.col-sm-2.background-lightgray:eq(4)').append($('<input type="button" id="id001102" value="《1》Save" style="width:80px;height:27px;font-size:13px;background:#008080;" >').click(function () {
+        settCookieNo1Array('defaultValueSet')
+
+    }))
+    $('.col-sm-2.background-lightgray:eq(4)').append($('<input type="button" id="id00112" value="《1》Set" style="width:80px;height:27px;font-size:13px;background:#00FFFF;" >').click(function () {
+        getCookieNo1Array('defaultValueSet')
+    }))
+    $('.col-sm-2.background-lightgray:eq(4)').append($('<input type="button" id="id0011032" value="《2》Save" style="width:80px;height:27px;font-size:13px;background:#3CB371;" >').click(function () {
+        settCookieNo1Array('defaultValueSetNo2')
+    }))
+    $('.col-sm-2.background-lightgray:eq(4)').append($('<input type="button" id="id0011032" value="《2》Set" style="width:80px;height:27px;font-size:13px;background:#00FF7F;" >').click(function () {
+        getCookieNo1Array('defaultValueSetNo2')
+    }))
+    $('.col-sm-2.background-lightgray:eq(4)').append($('<input type="button" id="id0011033" value="《3》Save" style="width:80px;height:27px;font-size:13px;background:#C71585;" >').click(function () {
+        settCookieNo1Array('defaultValueSetNo3')
+    }))
+    $('.col-sm-2.background-lightgray:eq(4)').append($('<input type="button" id="id0011033" value="《3》Set" style="width:80px;height:27px;font-size:13px;background:#FF1493;" >').click(function () {
+        getCookieNo1Array('defaultValueSetNo3')
+    }))
+
+
+}
+//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>保存ボタン>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>保存ボタン>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>保存ボタン
 if (mwurl.match(/^(?=.*ty.jp)(?=.*members)(?=.*admin)/)) {
     let $ = window.jQuery;
     let element = '';
@@ -371,6 +452,79 @@ if (mwurl.match(/^(?=.*admin)(?=.*smartdevice_parties)/)) {
     var ProgressdaytimeF = document.getElementsByClassName('container mb-30')[0].textContent.match(/\d{2}(?=:)/)
     var ProgressdaytimeB = document.getElementsByClassName('container mb-30')[0].textContent.match(/(?<=:)\d{2}/)
     document.title = `【進行】[${ProgressdaytimeF} : ${ProgressdaytimeB}]`;//タブ名
+    if (mwurl.match(/^(?=.*detail)(?=.*smartdevice_parties)/)) {//結果エクスポート
+        $('.text-left:eq(0)').append($('<input type="button" id="id1153" value="エクスポート" style="width:90px;height:27px;font-size:13px;background:#F08080;" >').click(function () {
+            function manExport() {
+                var woman = document.querySelector("body > div > div:nth-child(6) > div > table > tbody").getElementsByTagName('tr').length - 1
+                //女性の人数把握
+                var manjoin = document.querySelector("body > div > div:nth-child(6) > div > table > tbody > tr:nth-child(1)").getElementsByTagName('th').length - 1
+                //男性の人数把握
+                var dict = {};
+                for (var man = 2; man < manjoin + 2; man++) {
+                    var ary = [];
+                    for (var manNumvertical = 2; manNumvertical < woman + 2; manNumvertical++) {
+                        var goodnum = document.querySelector(`body > div > div:nth-child(6) > div > table > tbody > tr:nth-child(${manNumvertical}) > td:nth-child(${man})`).getElementsByClassName('col-sm-6')[1].textContent
+                        goodnum = goodnum || '0'
+                        ary.push(goodnum)
+                    }
+                    ////
+
+                    var intMax = 0; //配列の最大値が0の場合もあるため、配列の要素の1番目で初期化すること
+
+                    for (var i = 1; i < ary.length; i++) {　// 要素0番目のは代入済みのため1番目から開始する
+
+                        //intMaxに代入されている値と配列の要素を比較して、配列の要素のほうが大きい場合値を上書きする.
+                        if (intMax < ary[i]) {
+                            intMax = ary[i]
+                        }
+                    }
+                    var numranking = []
+                    for (var inum = 1; inum <= intMax; inum++) {
+                        var kari = ary.indexOf(`${inum}`)
+                        numranking.push(kari + 1)
+                    }
+                    ///
+                    dict[`${man - 1}男`] = numranking;
+                }
+                console.log(dict)
+
+            }
+            function womanExport() {
+                var woman = document.querySelector("body > div > div:nth-child(6) > div > table > tbody").getElementsByTagName('tr').length - 1
+                //女性の人数把握
+                var man = document.querySelector("body > div > div:nth-child(6) > div > table > tbody > tr:nth-child(1)").getElementsByTagName('th').length - 1
+                //男性の人数把握
+                var dict = {};
+                for (var womanNum = 2; womanNum < woman + 2; womanNum++) {
+                    var lineElement = document.querySelector(`body > div > div:nth-child(6) > div > table > tbody > tr:nth-child(${womanNum})`)
+                    var ary = [];
+                    for (var womanNumvertical = 2; womanNumvertical < man + 2; womanNumvertical++) {
+                        var goodnum = lineElement.querySelector(`td:nth-child(${womanNumvertical})`).getElementsByClassName('col-sm-6')[0].textContent
+                        goodnum = goodnum || '0'
+                        ary.push(goodnum)
+                    }
+                    var intMax = 0; //配列の最大値が0の場合もあるため、配列の要素の1番目で初期化すること
+
+                    for (var i = 0; i < ary.length; i++) {　// 要素0番目のは代入済みのため1番目から開始する
+                        //intMaxに代入されている値と配列の要素を比較して、配列の要素のほうが大きい場合値を上書きする.
+                        if (intMax < ary[i]) {
+                            intMax = ary[i]
+                        }
+                    }
+                    var numranking = []
+                    for (var iwoman = 1; iwoman <= intMax; iwoman++) {
+                        var kari = ary.indexOf(`${iwoman}`)
+                        numranking.push(kari + 1)
+                    }
+                    ///
+                    dict[`${womanNum - 1}女`] = numranking;
+                }
+                console.log(dict)
+            }
+            womanExport()
+            manExport()
+        }))
+    }
 }
 if (mwurl.match(/^(?=.*admin)(?=.*smart_parties)/)) {
     var ProgressdaytimeSmartF = document.getElementsByClassName('container mb-30')[0].textContent.match(/\d{2}(?=:)/)

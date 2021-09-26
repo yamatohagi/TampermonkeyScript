@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         test
 // @namespace    http://tampermonkey.net/
-// @version      0.16052
+// @version      0.16053
 // @description  try to take over the world!
 // @author       yamatohagi
 // @match        https://*/*
@@ -168,7 +168,7 @@ if (mwurl == 'https://www.partyparty.jp/admin/parties') {
         }
 
         var checkFloorNumAryString = checkFloorNumAry.join('+');
-        var checkFloorNumAryStringSet = `${saveNo1}=${checkFloorNumAryString}`
+        var checkFloorNumAryStringSet = `${saveNo1}=${checkFloorNumAryString}; max-age=1000000000`
         console.log(checkFloorNumAryStringSet)
         document.cookie = checkFloorNumAryStringSet
     }

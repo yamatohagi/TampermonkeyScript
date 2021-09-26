@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         test
 // @namespace    http://tampermonkey.net/
-// @version      0.16053
+// @version      0.16054
 // @description  try to take over the world!
 // @author       yamatohagi
 // @match        https://*/*
@@ -333,6 +333,10 @@ if (mwurl.match(/\/admin\/parties\//)) {
                     noId1[NUMPid].style.background = '#66CCFF';
                     noId2[NUMPid].style.background = '#66CCFF';
                     break;
+                  case 'party_start_at':
+                    noId1[NUMPid].style.background = '#66CCFF';
+                    noId2[NUMPid].style.background = '#66CCFF';
+                    break;
                 case 'allinbutton':
                     idinp1[NUMPid].style.background = '#FFFFAA';
                     full[NUMPid].getElementsByTagName('span')[1].style.backgroundColor = '#FFFFAA';
@@ -354,6 +358,10 @@ if (mwurl.match(/\/admin\/parties\//)) {
                     noId1[NUMPid].style.background = '';
                     noId2[NUMPid].style.background = '';
                     break;
+                case 'party_start_at':
+                    noId1[NUMPid].style.background = '';
+                    noId2[NUMPid].style.background = '';
+                    break;
                 case 'allinbutton':
                     idinp1[NUMPid].style.background = '';
                     full[NUMPid].getElementsByTagName('span')[1].style.backgroundColor = '';
@@ -372,6 +380,12 @@ if (mwurl.match(/\/admin\/parties\//)) {
             console.log(NUMPid)
             switch (e.target.className) {
                 case 'party_floor span-separate-sentences':
+                    navigator.clipboard.writeText(noId1[NUMPid].textContent + ' ' + noId2[NUMPid].textContent);
+                    console.log(noId1[NUMPid].textContent + noId2[NUMPid].textContent)
+                    noId1[NUMPid].style.background = '#33FF99';
+                    noId2[NUMPid].style.background = '#33FF99';
+                    break;
+                case 'party_start_at':
                     navigator.clipboard.writeText(noId1[NUMPid].textContent + ' ' + noId2[NUMPid].textContent);
                     console.log(noId1[NUMPid].textContent + noId2[NUMPid].textContent)
                     noId1[NUMPid].style.background = '#33FF99';

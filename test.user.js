@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         test
 // @namespace    http://tampermonkey.net/
-// @version      0.16055
+// @version      0.16056
 // @description  try to take over the world!
 // @author       yamatohagi
 // @match        https://*/*
@@ -347,7 +347,9 @@ if (mwurl.match(/\/admin\/parties\//)) {
                     party_id[NUMPid].style.background = '#FF97C2';
                     break;
                 default:
-                    console.log('選択ポイントはその他です。');
+                    if(e.target.tagName == 'SPAN'){
+                    full[NUMPid].getElementsByTagName('span')[1].style.backgroundColor = '#FFFFAA';
+                    }
             }
         }, false);
         full[pidi].addEventListener('mouseout', function (e) {
@@ -372,7 +374,9 @@ if (mwurl.match(/\/admin\/parties\//)) {
                     party_id[NUMPid].style.background = '';
                     break;
                 default:
-                    console.log('選択ポイントはその他です。');
+                    if(e.target.tagName == 'SPAN'){
+                    full[NUMPid].getElementsByTagName('span')[1].style.backgroundColor = '';
+                    }
             }
         })
         full[pidi].addEventListener('click', function (e) {
@@ -405,7 +409,10 @@ if (mwurl.match(/\/admin\/parties\//)) {
                     party_id[NUMPid].style.background = '#33FF99';
                     break;
                 default:
-                    console.log('選択ポイントはその他です。');
+                    if(e.target.tagName == 'SPAN'){
+                    navigator.clipboard.writeText(full[NUMPid].getElementsByTagName('span')[1].textContent)
+                    full[NUMPid].getElementsByTagName('span')[1].style.backgroundColor = '#33FF99';
+                    }
             }
         })
         full[pidi].addEventListener('dblclick', function (e) {

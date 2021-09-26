@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         test
 // @namespace    http://tampermonkey.net/
-// @version      0.16054
+// @version      0.16055
 // @description  try to take over the world!
 // @author       yamatohagi
 // @match        https://*/*
@@ -473,7 +473,7 @@ if (mwurl.match(/^(?=.*admin)(?=.*smartdevice_parties)/)) {
                 //女性の人数把握
                 var manjoin = document.querySelector("body > div > div:nth-child(6) > div > table > tbody > tr:nth-child(1)").getElementsByTagName('th').length - 1
                 //男性の人数把握
-                var dict = {};
+                var dict = [];
                 for (var man = 2; man < manjoin + 2; man++) {
                     var ary = [];
                     for (var manNumvertical = 2; manNumvertical < woman + 2; manNumvertical++) {
@@ -485,7 +485,7 @@ if (mwurl.match(/^(?=.*admin)(?=.*smartdevice_parties)/)) {
 
                     var intMax = 0; //配列の最大値が0の場合もあるため、配列の要素の1番目で初期化すること
 
-                    for (var i = 1; i < ary.length; i++) {　// 要素0番目のは代入済みのため1番目から開始する
+                    for (var i = 0; i < ary.length; i++) {　// 要素0番目のは代入済みのため1番目から開始する
 
                         //intMaxに代入されている値と配列の要素を比較して、配列の要素のほうが大きい場合値を上書きする.
                         if (intMax < ary[i]) {
@@ -498,17 +498,17 @@ if (mwurl.match(/^(?=.*admin)(?=.*smartdevice_parties)/)) {
                         numranking.push(kari + 1)
                     }
                     ///
-                    dict[`${man - 1}男`] = numranking;
+                     dict.push(numranking);
                 }
-                console.log(dict)
-
+                 console.log(dict)
+                console.log(dict.join('\n'))
             }
             function womanExport() {
                 var woman = document.querySelector("body > div > div:nth-child(6) > div > table > tbody").getElementsByTagName('tr').length - 1
                 //女性の人数把握
                 var man = document.querySelector("body > div > div:nth-child(6) > div > table > tbody > tr:nth-child(1)").getElementsByTagName('th').length - 1
                 //男性の人数把握
-                var dict = {};
+                var dict = [];
                 for (var womanNum = 2; womanNum < woman + 2; womanNum++) {
                     var lineElement = document.querySelector(`body > div > div:nth-child(6) > div > table > tbody > tr:nth-child(${womanNum})`)
                     var ary = [];
@@ -531,12 +531,13 @@ if (mwurl.match(/^(?=.*admin)(?=.*smartdevice_parties)/)) {
                         numranking.push(kari + 1)
                     }
                     ///
-                    dict[`${womanNum - 1}女`] = numranking;
+                    dict.push(numranking);
                 }
                 console.log(dict)
+                console.log(dict.join('\n'))
             }
-            womanExport()
             manExport()
+            womanExport()            
         }))
     }
 }

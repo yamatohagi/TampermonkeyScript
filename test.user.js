@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         test
 // @namespace    http://tampermonkey.net/
-// @version      0.16057
+// @version      0.16058
 // @description  try to take over the world!
 // @author       yamatohagi
 // @match        https://*/*
@@ -153,7 +153,7 @@ if (mwurl == 'https://www.partyparty.jp/admin/parties') {
             var num = getFloorNumArr[checkFloorNum]
             document.getElementsByClassName('sales_section_check_box')[num].checked = true
             setTimeout(function(){
-						document.getElementsByClassName('sales_section_check_box')[num].focus()
+						document.getElementById('admin_party_search_wday_1').focus()
 					},0);
         }
 

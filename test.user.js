@@ -127,8 +127,7 @@ if (mwurl == 'https://www.partyparty.jp/admin/parties') {
 // <<<<<<<<<<<<<<<<<保存ボタン <<<<<<<<<<<<<<<<<保存ボタン <<<<<<<<<<<<<<<<<保存ボタン <<<<<<<<<<<<<<<<<
 if (mwurl == 'https://www.partyparty.jp/admin/parties') {
     var ptSearchdate = new Date()
-    function getCookieNo1Array(getNo1) {
-        document.getElementsByClassName('form-control input-sm')[0].focus()
+    function getCookieNo1Array(getNo1) {        
         function getCookieArray() {
             var arr = new Array();
             if (document.cookie != '') {
@@ -153,6 +152,9 @@ if (mwurl == 'https://www.partyparty.jp/admin/parties') {
         for (var checkFloorNum = 0; checkFloorNum < getFloorNumArr.length; checkFloorNum++) {
             var num = getFloorNumArr[checkFloorNum]
             document.getElementsByClassName('sales_section_check_box')[num].checked = true
+            setTimeout(function(){
+						document.getElementsByClassName('sales_section_check_box')[num].focus()
+					},0);
         }
 
     }
@@ -175,12 +177,16 @@ if (mwurl == 'https://www.partyparty.jp/admin/parties') {
     $('.col-sm-8:eq(1)').append($('<input type="button" id="id1156" value="今日" style="width:50px;height:27px;font-size:13px;background:#F08080;" >').click(function () {
         document.getElementById('party_search_from').value = (`${ptSearchdate.getFullYear()}/${ptSearchdate.getMonth() + 1}/${ptSearchdate.getDate() + 0}`)
         document.getElementById('party_search_to').value = (`${ptSearchdate.getFullYear()}/${ptSearchdate.getMonth() + 1}/${ptSearchdate.getDate() + 0}`)
-        document.getElementsByClassName('form-control input-sm')[0].focus()
+        setTimeout(function(){
+						document.getElementById('admin_party_search_wday_1').focus()
+					},0);
     }))
     $('.col-sm-8:eq(1)').append($('<input type="button" id="id1156" value="明日" style="width:50px;height:27px;font-size:13px;background:#F08080;" >').click(function () {
         document.getElementById('party_search_from').value = (`${ptSearchdate.getFullYear()}/${ptSearchdate.getMonth() + 1}/${ptSearchdate.getDate() + 1}`)
         document.getElementById('party_search_to').value = (`${ptSearchdate.getFullYear()}/${ptSearchdate.getMonth() + 1}/${ptSearchdate.getDate() + 1}`)
-        document.getElementsByClassName('form-control input-sm')[0].focus()
+        setTimeout(function(){
+						document.getElementById('admin_party_search_wday_1').focus()
+					},0);
     }))
     $('.col-sm-2.background-lightgray:eq(4)').append($('<input type="button" id="id001102" value="《1》Save" style="width:80px;height:27px;font-size:13px;background:#008080;" >').click(function () {
         settCookieNo1Array('defaultValueSet')

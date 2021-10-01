@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         test
 // @namespace    http://tampermonkey.net/
-// @version      0.16058
+// @version      0.16059
 // @description  try to take over the world!
 // @author       yamatohagi
 // @match        https://*/*
@@ -563,11 +563,13 @@ if (mwurl.match(/^(?=.*admin)(?=.*parties)(?=.*search)/)) {
     var periodfront = location.href.match(/(?<=admin_party_search%5Bfrom%5D=)(.*?)(?=&)/)
     var periodYfront = periodfront[0].match(/\d{4}(?=%2F)/)
     var periodMfront = periodfront[0].match(/(?<=%2F)(.*?)(?=%2F)/)
-    var periodDfront = periodfront[0].slice(-2)
+    var periodDfront = periodfront[0].slice(-3)
+    periodDfront = periodDfront.match(/(?<=F)\d+/)
     var periodafter = location.href.match(/(?<=admin_party_search%5Bto%5D=)(.*?)(?=&)/)
     var periodYafter = periodafter[0].match(/\d{4}(?=%2F)/)
     var periodMafter = periodafter[0].match(/(?<=%2F)(.*?)(?=%2F)/)
-    var periodDafter = periodafter[0].slice(-2)
+    var periodDafter = periodafter[0].slice(-3)
+    periodDafter = periodDafter.match(/(?<=F)\d+/)
     document.title = `【PT一覧】${periodMfront[0]}/${periodDfront}～${periodMafter[0]}/${periodDafter}`;//タブ名
     $('.text-left:eq(0)').append($('<input type="button" id="id001102" value="Sボタン" style="width:80px;height:27px;font-size:13px;background:#FF6633;" >').click(function () {
         var NameAndjoinnum = []

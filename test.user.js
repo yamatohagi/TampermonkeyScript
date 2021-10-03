@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         test
 // @namespace    http://tampermonkey.net/
-// @version      0.16059
+// @version      0.16060
 // @description  try to take over the world!
 // @author       yamatohagi
 // @match        https://*/*
@@ -174,37 +174,37 @@ if (mwurl == 'https://www.partyparty.jp/admin/parties') {
         console.log(checkFloorNumAryStringSet)
         document.cookie = checkFloorNumAryStringSet
     }
-    $('.col-sm-8:eq(1)').append($('<input type="button" id="id1156" value="今日" style="width:50px;height:27px;font-size:13px;background:#F08080;" >').click(function () {
+    $('.col-sm-8:eq(1)').append($('<input type="button" id="id1156" value="今日" style="width:50px;height:27px;font-size:15px;background:#CEEAF7;" >').click(function () {
         document.getElementById('party_search_from').value = (`${ptSearchdate.getFullYear()}/${ptSearchdate.getMonth() + 1}/${ptSearchdate.getDate() + 0}`)
         document.getElementById('party_search_to').value = (`${ptSearchdate.getFullYear()}/${ptSearchdate.getMonth() + 1}/${ptSearchdate.getDate() + 0}`)
         setTimeout(function(){
 						document.getElementById('admin_party_search_wday_1').focus()
 					},0);
     }))
-    $('.col-sm-8:eq(1)').append($('<input type="button" id="id1156" value="明日" style="width:50px;height:27px;font-size:13px;background:#F08080;" >').click(function () {
+    $('.col-sm-8:eq(1)').append($('<input type="button" id="id1156" value="明日" style="width:50px;height:27px;font-size:15px;background:#EBD5E6;" >').click(function () {
         document.getElementById('party_search_from').value = (`${ptSearchdate.getFullYear()}/${ptSearchdate.getMonth() + 1}/${ptSearchdate.getDate() + 1}`)
         document.getElementById('party_search_to').value = (`${ptSearchdate.getFullYear()}/${ptSearchdate.getMonth() + 1}/${ptSearchdate.getDate() + 1}`)
         setTimeout(function(){
 						document.getElementById('admin_party_search_wday_1').focus()
 					},0);
     }))
-    $('.col-sm-2.background-lightgray:eq(4)').append($('<input type="button" id="id001102" value="《1》Save" style="width:80px;height:27px;font-size:13px;background:#008080;" >').click(function () {
+     $('.col-sm-2.background-lightgray:eq(4)').append($('<input type="button" id="id0011021" value="①保存" style="width:80px;color:#353535;height:27px;font-size:14px;background:#92C9C9;" >').click(function () {
         settCookieNo1Array('defaultValueSet')
 
     }))
-    $('.col-sm-2.background-lightgray:eq(4)').append($('<input type="button" id="id00112" value="《1》Set" style="width:80px;height:27px;font-size:13px;background:#00FFFF;" >').click(function () {
+    $('.col-sm-2.background-lightgray:eq(4)').append($('<input type="button" id="id00112" value="①Set" style="width:80px;color:#353535;height:27px;font-size:14px;background:#92C9C9;" >').click(function () {
         getCookieNo1Array('defaultValueSet')
     }))
-    $('.col-sm-2.background-lightgray:eq(4)').append($('<input type="button" id="id0011032" value="《2》Save" style="width:80px;height:27px;font-size:13px;background:#3CB371;" >').click(function () {
+    $('.col-sm-2.background-lightgray:eq(4)').append($('<input type="button" id="id00110321" value="②保存" style="width:80px;color:#353535;height:27px;font-size:14px;background:#E8CEB0;" >').click(function () {
         settCookieNo1Array('defaultValueSetNo2')
     }))
-    $('.col-sm-2.background-lightgray:eq(4)').append($('<input type="button" id="id0011032" value="《2》Set" style="width:80px;height:27px;font-size:13px;background:#00FF7F;" >').click(function () {
+    $('.col-sm-2.background-lightgray:eq(4)').append($('<input type="button" id="id0011032" value="②Set" style="width:80px;color:#353535;height:27px;font-size:14px;background:#E8CEB0;" >').click(function () {
         getCookieNo1Array('defaultValueSetNo2')
     }))
-    $('.col-sm-2.background-lightgray:eq(4)').append($('<input type="button" id="id0011033" value="《3》Save" style="width:80px;height:27px;font-size:13px;background:#C71585;" >').click(function () {
+    $('.col-sm-2.background-lightgray:eq(4)').append($('<input type="button" id="id00110331" value="③保存" style="width:80px;color:#353535;height:27px;font-size:14px;background:#C3E991;" >').click(function () {
         settCookieNo1Array('defaultValueSetNo3')
     }))
-    $('.col-sm-2.background-lightgray:eq(4)').append($('<input type="button" id="id0011033" value="《3》Set" style="width:80px;height:27px;font-size:13px;background:#FF1493;" >').click(function () {
+    $('.col-sm-2.background-lightgray:eq(4)').append($('<input type="button" id="id0011033" value="③Set" style="width:80px;color:#353535;height:27px;font-size:14px;background:#C3E991;" >').click(function () {
         getCookieNo1Array('defaultValueSetNo3')
     }))
 

@@ -281,13 +281,7 @@ if (mwurl.match(/^(?=.*ty.jp)(?=.*members)(?=.*admin)/)) {
                 navigator.clipboard.writeText('ER');
             }
         }));
-         $('th.background-lightgray:eq(0)').append($('<input type="button" id="id0034" value="ID" style="width:30px;height:23px;font-size:12px;background:#EBEBEB;" >').click(function () {
-            document.getElementById("id0034").style.background = "#CCCCCC"
-             $("td:contains('160947')")[0].style.backgroundColor = '#ffff00'
-            setTimeout(function () {
-                document.getElementById("id0034").style.background = "#EBEBEB"
-                $("td:contains('160947')")[0].style.backgroundColor = ''
-            }, 100);
+         $('th.background-lightgray:eq(0)').append($('<input type="button" id="id0034" value="ID" style="width:30px;height:23px;font-size:12px;background:#EBEBEB;" >').click(function () {            
             IDcopyclientfield = $("th:contains('会員ID')")[0].nextElementSibling.innerHTML.match(/\d+/)[0];
             if (!(IDcopyclientfield == null || IDcopyclientfield == '')) {
                 navigator.clipboard.writeText(IDcopyclientfield);
@@ -295,6 +289,12 @@ if (mwurl.match(/^(?=.*ty.jp)(?=.*members)(?=.*admin)/)) {
             } else {
                 navigator.clipboard.writeText('ER');
             }
+             document.getElementById("id0034").style.background = "#CCCCCC"
+             $(`td:contains('${IDcopyclientfield}')`)[0].style.backgroundColor = '#ffff00'
+            setTimeout(function () {
+                document.getElementById("id0034").style.background = "#EBEBEB"
+                $(`td:contains('${IDcopyclientfield}')`)[0].style.backgroundColor = ''
+            }, 100);
         }));;
     }
     //////////______________________________________会員詳細情報画面のみ/////______________________________________会員詳細情報画面のみ/////______________________________________会員詳細情報画面のみ

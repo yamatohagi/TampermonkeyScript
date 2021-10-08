@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         test
 // @namespace    http://tampermonkey.net/
-// @version      0.16062
+// @version      0.16063
 // @description  try to take over the world!
 // @author       yamatohagi
 // @match        https://*/*
@@ -223,8 +223,8 @@ if (mwurl.match(/^(?=.*ty.jp)(?=.*members)(?=.*admin)/)) {
         $('th.background-lightgray:eq(6)').append($('<input type="button" id="id001" value="メアド" style="width:55px;height:27px;font-size:8px;background:#EBEBEB;" >').click(function () {
             document.getElementById("id001").style.background = "#CCCCCC"
             setTimeout(function () {
-                document.getElementById("id001").style.background = "#3399FF"
-            }, 2000);
+                document.getElementById("id001").style.background = "#EBEBEB"
+            }, 100);
             maillcopyclientfield = document.getElementsByClassName('table table-sm table-bordered')[0].textContent.match(/メールアドレス(.*)連絡用メールアドレス/)[1];
             if (!(maillcopyclientfield == null || maillcopyclientfield == '')) {
                 navigator.clipboard.writeText(maillcopyclientfield);
@@ -236,8 +236,8 @@ if (mwurl.match(/^(?=.*ty.jp)(?=.*members)(?=.*admin)/)) {
         $('th.background-lightgray:eq(2)').append($('<input type="button" id="id0003" value="フルネーム" style="width:70px;height:27px;font-size:8px;background:#EBEBEB;" >').click(function () {
             document.getElementById("id0003").style.background = "#CCCCCC"
             setTimeout(function () {
-                document.getElementById("id0003").style.background = "#FFCC66"
-            }, 2000);
+                document.getElementById("id0003").style.background = "#EBEBEB"
+            }, 100);
             let fullNameString = document.getElementsByClassName('table table-sm table-bordered')[0].textContent.match(/姓名（ふりがな）(.*)\s[（(]/);
             if (!(fullNameString == null || fullNameString == '')) {
                 navigator.clipboard.writeText(fullNameString[1]);
@@ -249,8 +249,8 @@ if (mwurl.match(/^(?=.*ty.jp)(?=.*members)(?=.*admin)/)) {
         $('th.background-lightgray:eq(2)').append($('<input type="button" id="id0001" value="苗字" style="width:50px;height:27px;font-size:8px;background:#EBEBEB;" >').click(function () {
             document.getElementById("id0001").style.background = "#CCCCCC"
             setTimeout(function () {
-                document.getElementById("id0001").style.background = "#00CC33"
-            }, 2000);
+                document.getElementById("id0001").style.background = "#EBEBEB"
+            }, 100);
             var tagetString = document.getElementsByClassName('table table-sm table-bordered')[0].textContent.match(/姓名（ふりがな）(.*)\s[（(]/);
             if (!(tagetString == null || tagetString == '')) {
                 tagetString = tagetString[1].split(/\s+/)[0]
@@ -264,7 +264,7 @@ if (mwurl.match(/^(?=.*ty.jp)(?=.*members)(?=.*admin)/)) {
             document.getElementById("id0016").style.background = "#CCCCCC"
             setTimeout(function () {
                 document.getElementById("id0016").style.background = "#FF6633"
-            }, 2000);
+            }, 100);
             var addressPluse = 'null'
             var namePluse = document.getElementsByClassName('table table-sm table-bordered')[0].textContent.match(/姓名（ふりがな）(.*)\s[（(]/);
             if (!(namePluse == null || namePluse == '')) {

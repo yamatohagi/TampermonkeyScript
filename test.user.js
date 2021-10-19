@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         test
 // @namespace    http://tampermonkey.net/
-// @version      0.16063
+// @version      0.16064
 // @description  try to take over the world!
 // @author       yamatohagi
 // @match        https://*/*
@@ -238,7 +238,7 @@ if (mwurl.match(/^(?=.*ty.jp)(?=.*members)(?=.*admin)/)) {
             setTimeout(function () {
                 document.getElementById("id0003").style.background = "#EBEBEB"
             }, 100);
-            let fullNameString = document.getElementsByClassName('table table-sm table-bordered')[0].textContent.match(/姓名（ふりがな）(.*)\s[（(]/);
+            let fullNameString = document.getElementsByClassName('table table-sm table-bordered')[0].textContent.match(/姓名（ふりがな）(.*)\s\s[（(]/);
             if (!(fullNameString == null || fullNameString == '')) {
                 navigator.clipboard.writeText(fullNameString[1]);
                 console.log(fullNameString[1]);
@@ -293,6 +293,21 @@ if (mwurl.match(/^(?=.*ty.jp)(?=.*members)(?=.*admin)/)) {
              $(`td:contains('${IDcopyclientfield}')`)[0].style.backgroundColor = '#ffff00'
             setTimeout(function () {
                 document.getElementById("id0034").style.background = "#EBEBEB"
+                $(`td:contains('${IDcopyclientfield}')`)[0].style.backgroundColor = ''
+            }, 100);
+        }));;
+        $('th.background-lightgray:eq(5)').append($('<input type="button" id="id00341" value="電話番号" style="width:60px;height:23px;font-size:12px;background:#EBEBEB;" >').click(function () {
+            IDcopyclientfield = $("th:contains('携帯番号')")[0].nextElementSibling.innerHTML.match(/\d+/)[0];
+            if (!(IDcopyclientfield == null || IDcopyclientfield == '')) {
+                navigator.clipboard.writeText(IDcopyclientfield);
+                console.log(IDcopyclientfield);
+            } else {
+                navigator.clipboard.writeText('ER');
+            }
+             document.getElementById("id00341").style.background = "#CCCCCC"
+             $(`td:contains('${IDcopyclientfield}')`)[0].style.backgroundColor = '#ffff00'
+            setTimeout(function () {
+                document.getElementById("id00341").style.background = "#EBEBEB"
                 $(`td:contains('${IDcopyclientfield}')`)[0].style.backgroundColor = ''
             }, 100);
         }));;

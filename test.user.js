@@ -528,7 +528,7 @@ if (mwurl.match(/^(?=.*admin)(?=.*parties)(?=.*search)/)) {
     var periodDafter = periodafter[0].slice(-3)
     periodDafter = periodDafter.match(/(?<=F)\d+/)
     document.title = `【PT一覧】${periodMfront[0]}/${periodDfront}～${periodMafter[0]}/${periodDafter}`;//タブ名
-    $('.text-left:eq(0)').append($('<input type="button" id="id001102" value="Sボタン" style="width:80px;height:27px;font-size:13px;background:#FF6633;" >').click(function () {
+    $('.text-left:eq(0)').append($('<input type="button" id="id001102" value="" style="width:80px;height:27px;font-size:13px;" >').click(function () { //sボタン
         var NameAndjoinnum = []
         for (var pidi = 0; pidi < document.getElementsByClassName('col-sm-7 text-left').length; pidi++) {
             var testPspan = document.getElementsByClassName('col-sm-7 text-left')[pidi].getElementsByTagName('span')[1].textContent

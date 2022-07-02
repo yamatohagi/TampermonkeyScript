@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         test
 // @namespace    http://tampermonkey.net/
-// @version      0.16067
+// @version      0.1606
 // @description  try to take over the world!
 // @author       yamatohagi
 // @match        https://*/*
@@ -410,23 +410,4 @@ if (mwurl.match(/^(?=.*admin)(?=.*parties)(?=.*search)/)) {
     var periodDafter = periodafter[0].slice(-3)
     periodDafter = periodDafter.match(/(?<=F)\d+/)
     document.title = `${periodMfront[0]}${periodDfront}~${periodMafter[0]}${periodDafter}`;//タブ名
-    $('.text-left:eq(0)').append($('<input type="button" id="id001102" value="" style="width:1px;height:1px;font-size:13px;" >').click(function () { //sボタン
-        var NameAndjoinnum = []
-        for (var pidi = 0; pidi < document.getElementsByClassName('col-sm-7 text-left').length; pidi++) {
-            var testPspan = document.getElementsByClassName('col-sm-7 text-left')[pidi].getElementsByTagName('span')[1].textContent
-            var cusidinp1 = document.getElementsByClassName('party_id')[pidi].textContent
-            var cusidinp2 = document.getElementsByClassName('party_floor span-separate-sentences')[pidi].textContent
-            var cusidinp3 = document.getElementsByClassName('party_start_at')[pidi].textContent
-            var cusparty_id = document.getElementsByClassName('party_id')[pidi].textContent
-            var kikakunum = document.getElementsByClassName('table table-sm table-bordered')[pidi].textContent.match(/\d+(?=対)/)
-            var joinman = document.getElementsByClassName('capacity_man')[pidi].previousElementSibling.textContent
-            var joinwoman = document.getElementsByClassName('capacity_woman')[pidi].previousElementSibling.textContent
-            var womanAge = document.getElementsByClassName('table table-sm table-bordered')[pidi].textContent.match(/(?<=年齢・条件\（女性\）\d+[~〜～])\d+(?=歳)/)
-            var womanJsPass = document.querySelector(`#edit_party_${cusparty_id} > table > tbody > tr:nth-child(10) > td:nth-child(2) > div`).innerHTML.match(/(.*?)(?=<br>)/)[0]
-            womanAge = womanAge || womanJsPass;
-            NameAndjoinnum.push(`${cusidinp1} ${testPspan} ${cusidinp2} ${cusidinp3} ${joinman}-${joinwoman}(${kikakunum}-${kikakunum}) ${womanAge}`);
-        }
-        console.log(NameAndjoinnum.join('\n'));
-        navigator.clipboard.writeText(NameAndjoinnum.join('\n'));
-    }))
 }

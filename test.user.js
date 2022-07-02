@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         test
 // @namespace    http://tampermonkey.net/
-// @version      0.16066
+// @version      0.16067
 // @description  try to take over the world!
 // @author       yamatohagi
 // @match        https://*/*
@@ -85,22 +85,7 @@ if (mwurl.match(/^(?=.*MailSend)(?=.*japan)/)) {
             }
         });
     };
-    $('.mailsend-selectStatus').eq(0).append($('<input type="button" id="id01199" value="メアド＆苗字" style="width:110px;height:30px;font-size:15px;background:#FF6633;" >').click(function () {
-        document.getElementById("id01199").style.background = "#CCCCCC"
-        setTimeout(function () {
-            document.getElementById("id01199").style.background = "#FF6633"
-        }, 2000);
-        NameAndMaill()
-    }));
-    $('.mailsend-selectStatus').eq(0).append($('<input type="button" id="id01192" value="【PatyName】" style="width:110px;height:30px;font-size:15px;background:#66CCFF;" >').click(function () {
-        document.getElementById("id01192").style.background = "#CCCCCC"
-        setTimeout(function () {
-            document.getElementById("id01192").style.background = "#66CCFF"
-        }, 2000);
-        paName()
-    }));
 }
-
 ///////////////////////【mw to ykmshg】///////////////////////////////////
 if (mwurl.match(/^(?=.*ty.jp)(?=.*members)(?=.*admin)(?=.*ykmshg)/)) {
     if (document.getElementsByClassName('container mb-30')[0].textContent.match(/1件を表示/)) {
@@ -139,7 +124,6 @@ if (mwurl == 'https://www.partyparty.jp/admin/parties') {
             }
             return arr;
         }
-
         // keyを指定して取得
         // 「 key1=val1; key2=val2; key3=val3; ・・・ 」というCookie情報が保存されているとする
         var arrSelected = getCookieArray();
@@ -153,22 +137,18 @@ if (mwurl == 'https://www.partyparty.jp/admin/parties') {
             var num = getFloorNumArr[checkFloorNum]
             document.getElementsByClassName('sales_section_check_box')[num].checked = true
             setTimeout(function(){
-						document.getElementById('admin_party_search_wday_1').focus()
-					},0);
+                        document.getElementById('admin_party_search_wday_1').focus()
+                    },0);
         }
-
     }
     function settCookieNo1Array(saveNo1) {
-
         var checkFloorNumAry = [];
         var checkFloor = document.getElementsByClassName('sales_section_check_box')
         for (var checkFloorNum = 0; checkFloorNum < checkFloor.length; checkFloorNum++) {
             if (checkFloor[checkFloorNum].checked == true) {
                 checkFloorNumAry.push(checkFloorNum)
             }
-
         }
-
         var checkFloorNumAryString = checkFloorNumAry.join('+');
         var checkFloorNumAryStringSet = `${saveNo1}=${checkFloorNumAryString}; max-age=1000000000`
         console.log(checkFloorNumAryStringSet)
@@ -178,19 +158,18 @@ if (mwurl == 'https://www.partyparty.jp/admin/parties') {
         document.getElementById('party_search_from').value = (`${ptSearchdate.getFullYear()}/${ptSearchdate.getMonth() + 1}/${ptSearchdate.getDate() + 0}`)
         document.getElementById('party_search_to').value = (`${ptSearchdate.getFullYear()}/${ptSearchdate.getMonth() + 1}/${ptSearchdate.getDate() + 0}`)
         setTimeout(function(){
-						document.getElementById('admin_party_search_wday_1').focus()
-					},0);
+                        document.getElementById('admin_party_search_wday_1').focus()
+                    },0);
     }))
     $('.col-sm-8:eq(1)').append($('<input type="button" id="id1156" value="明日" style="width:50px;height:27px;font-size:15px;background:#EBD5E6;" >').click(function () {
         document.getElementById('party_search_from').value = (`${ptSearchdate.getFullYear()}/${ptSearchdate.getMonth() + 1}/${ptSearchdate.getDate() + 1}`)
         document.getElementById('party_search_to').value = (`${ptSearchdate.getFullYear()}/${ptSearchdate.getMonth() + 1}/${ptSearchdate.getDate() + 1}`)
         setTimeout(function(){
-						document.getElementById('admin_party_search_wday_1').focus()
-					},0);
+                        document.getElementById('admin_party_search_wday_1').focus()
+                    },0);
     }))
      $('.col-sm-2.background-lightgray:eq(4)').append($('<input type="button" id="id0011021" value="①保存" style="width:80px;color:#353535;height:27px;font-size:14px;background:#92C9C9;" >').click(function () {
         settCookieNo1Array('defaultValueSet')
-
     }))
     $('.col-sm-2.background-lightgray:eq(4)').append($('<input type="button" id="id00112" value="①Set" style="width:80px;color:#353535;height:27px;font-size:14px;background:#92C9C9;" >').click(function () {
         getCookieNo1Array('defaultValueSet')
@@ -207,8 +186,6 @@ if (mwurl == 'https://www.partyparty.jp/admin/parties') {
     $('.col-sm-2.background-lightgray:eq(4)').append($('<input type="button" id="id0011033" value="③Set" style="width:80px;color:#353535;height:27px;font-size:14px;background:#C3E991;" >').click(function () {
         getCookieNo1Array('defaultValueSetNo3')
     }))
-
-
 }
 //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>保存ボタン>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>保存ボタン>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>保存ボタン
 if (mwurl.match(/^(?=.*ty.jp)(?=.*members)(?=.*admin)/)) {
@@ -220,97 +197,6 @@ if (mwurl.match(/^(?=.*ty.jp)(?=.*members)(?=.*admin)/)) {
     if (document.querySelector("body > div > h2").textContent == '会員詳細情報') {
         document.title = "【会員情報】";//タブ名
         console.log("会員詳細情報が実行されています");
-        $('th.background-lightgray:eq(6)').append($('<input type="button" id="id001" value="メアド" style="width:55px;height:27px;font-size:8px;background:#EBEBEB;" >').click(function () {
-            document.getElementById("id001").style.background = "#CCCCCC"
-            setTimeout(function () {
-                document.getElementById("id001").style.background = "#EBEBEB"
-            }, 100);
-            maillcopyclientfield = document.getElementsByClassName('table table-sm table-bordered')[0].textContent.match(/メールアドレス(.*)連絡用メールアドレス/)[1];
-            if (!(maillcopyclientfield == null || maillcopyclientfield == '')) {
-                navigator.clipboard.writeText(maillcopyclientfield);
-                console.log(maillcopyclientfield);
-            } else {
-                navigator.clipboard.writeText('ER');
-            }
-        }));;
-        $('th.background-lightgray:eq(2)').append($('<input type="button" id="id0003" value="フルネーム" style="width:70px;height:27px;font-size:8px;background:#EBEBEB;" >').click(function () {
-            document.getElementById("id0003").style.background = "#CCCCCC"
-            setTimeout(function () {
-                document.getElementById("id0003").style.background = "#EBEBEB"
-            }, 100);
-            let fullNameString = document.getElementsByClassName('table table-sm table-bordered')[0].textContent.match(/姓名（ふりがな）(.*)\s\s[（(]/);
-            if (!(fullNameString == null || fullNameString == '')) {
-                navigator.clipboard.writeText(fullNameString[1]);
-                console.log(fullNameString[1]);
-            } else {
-                navigator.clipboard.writeText('ER');
-            }
-        }));;
-        $('th.background-lightgray:eq(2)').append($('<input type="button" id="id0001" value="苗字" style="width:50px;height:27px;font-size:8px;background:#EBEBEB;" >').click(function () {
-            document.getElementById("id0001").style.background = "#CCCCCC"
-            setTimeout(function () {
-                document.getElementById("id0001").style.background = "#EBEBEB"
-            }, 100);
-            var tagetString = document.getElementsByClassName('table table-sm table-bordered')[0].textContent.match(/姓名（ふりがな）(.*)\s[（(]/);
-            if (!(tagetString == null || tagetString == '')) {
-                tagetString = tagetString[1].split(/\s+/)[0]
-                console.log(tagetString);
-                navigator.clipboard.writeText(tagetString);
-            } else {
-                navigator.clipboard.writeText('ER');
-            }
-        }));;
-        $('th.background-lightgray:eq(6)').append($('<input type="button" id="id0016" value="メアド＆苗字" style="width:80px;height:27px;font-size:10px;background:#FF6633;" >').click(function () {
-            document.getElementById("id0016").style.background = "#CCCCCC"
-            setTimeout(function () {
-                document.getElementById("id0016").style.background = "#FF6633"
-            }, 100);
-            var addressPluse = 'null'
-            var namePluse = document.getElementsByClassName('table table-sm table-bordered')[0].textContent.match(/姓名（ふりがな）(.*)\s[（(]/);
-            if (!(namePluse == null || namePluse == '')) {
-                namePluse = namePluse[1].split(/\s+/)[0]
-                addressPluse = document.getElementsByClassName('table table-sm table-bordered')[0].textContent.match(/メールアドレス(.*)連絡用メールアドレス/)[1];
-                if (!(addressPluse == null || addressPluse == '')) {
-                    navigator.clipboard.writeText(`comand+${addressPluse}+name+${namePluse}+comand`);
-                    console.log(addressPluse);
-                    console.log(namePluse);
-                } else {
-                    navigator.clipboard.writeText('ER');
-                }
-            } else {
-                navigator.clipboard.writeText('ER');
-            }
-        }));
-         $('th.background-lightgray:eq(0)').append($('<input type="button" id="id0034" value="ID" style="width:30px;height:23px;font-size:12px;background:#EBEBEB;" >').click(function () {            
-            IDcopyclientfield = $("th:contains('会員ID')")[0].nextElementSibling.innerHTML.match(/\d+/)[0];
-            if (!(IDcopyclientfield == null || IDcopyclientfield == '')) {
-                navigator.clipboard.writeText(IDcopyclientfield);
-                console.log(IDcopyclientfield);
-            } else {
-                navigator.clipboard.writeText('ER');
-            }
-             document.getElementById("id0034").style.background = "#CCCCCC"
-             $(`td:contains('${IDcopyclientfield}')`)[0].style.backgroundColor = '#ffff00'
-            setTimeout(function () {
-                document.getElementById("id0034").style.background = "#EBEBEB"
-                $(`td:contains('${IDcopyclientfield}')`)[0].style.backgroundColor = ''
-            }, 100);
-        }));;
-        $('th.background-lightgray:eq(5)').append($('<input type="button" id="id00341" value="電話番号" style="width:60px;height:23px;font-size:12px;background:#EBEBEB;" >').click(function () {
-            IDcopyclientfield = $("th:contains('携帯番号')")[0].nextElementSibling.innerHTML.match(/\d+/)[0];
-            if (!(IDcopyclientfield == null || IDcopyclientfield == '')) {
-                navigator.clipboard.writeText(IDcopyclientfield);
-                console.log(IDcopyclientfield);
-            } else {
-                navigator.clipboard.writeText('ER');
-            }
-             document.getElementById("id00341").style.background = "#CCCCCC"
-             $(`td:contains('${IDcopyclientfield}')`)[0].style.backgroundColor = '#ffff00'
-            setTimeout(function () {
-                document.getElementById("id00341").style.background = "#EBEBEB"
-                $(`td:contains('${IDcopyclientfield}')`)[0].style.backgroundColor = ''
-            }, 100);
-        }));;
     }
     //////////______________________________________会員詳細情報画面のみ/////______________________________________会員詳細情報画面のみ/////______________________________________会員詳細情報画面のみ
     document.getElementById("member_search_freeword").oninput = function () {
@@ -330,7 +216,7 @@ if (mwurl.match(/^(?=.*ty.jp)(?=.*members)(?=.*admin)/)) {
                     element = document.getElementById('member_search_freeword_target_1');
                 }
                 else {
-                    if (value.match(/^[ぁ-んー　]*$/)) {  //"ー"の後ろの文字は全角スペース
+                    if (value.match(/^[ぁ-んー　]*$/)) {  //"ー"の後ろの文字は全角スペース
                         console.log("ひらがな");
                         element = document.getElementById('member_search_freeword_target_4');
                     }
@@ -345,9 +231,7 @@ if (mwurl.match(/^(?=.*ty.jp)(?=.*members)(?=.*admin)/)) {
     }
 }
 //////////////////////////////////////////【admin】///////////////////////////////////////【admin】/////////////////////////////////////
-
 ///////【member_search】/////////////【member_search】///////
-
 ///////【member_search】/////////////【member_search】///////
 if (mwurl.match(/\/admin\/parties\//)) {
     let $ = window.jQuery;
@@ -463,7 +347,6 @@ if (mwurl.match(/\/admin\/parties\//)) {
                     var womanAge = document.getElementsByClassName('row party-frame')[NUMPid].textContent.match(/(?<=年齢・条件\（女性\）\d+[~〜～])\d+(?=歳)/)
                     var womanJsPass = document.querySelector(`#edit_party_${party_id[NUMPid].textContent} > table > tbody > tr:nth-child(10) > td:nth-child(2) > div`).innerHTML.match(/(.*?)(?=<br>)/)[0]
                     womanAge = womanAge || womanJsPass;
-
                     navigator.clipboard.writeText(`${idinp1[NUMPid].textContent} ${full[NUMPid].getElementsByTagName('span')[1].textContent} ${idinp2[NUMPid].textContent} ${idinp3[NUMPid].textContent} ${joinman}-${joinwoman}(${kikakunum}-${kikakunum}) ${womanAge}`)
                     idinp1[NUMPid].style.background = '#ff0000';
                     full[NUMPid].getElementsByTagName('span')[1].style.backgroundColor = '#ff0000';
@@ -490,7 +373,6 @@ if (mwurl.match(/\/admin\/parties/)) {
             editMin = '00'
         }
         var editDay = document.getElementById('start_at_date').value.slice(-5)
-
         document.title = `【PT編集】${editDay} ${editHour} : ${editMin}`;
     }
 }
@@ -499,12 +381,12 @@ if (mwurl.match(/\/admin\/members/)) {
         document.title = '【会員検索】'
     }
 }
-
 if (mwurl.match(/\/admin\/parties\/\d/)) {
+    var ptdate = document.getElementsByClassName('party_start_at')[0].getAttribute('data-start-at').match(/(?<=\d{4}\/).*?(?=\d{2}:\d{2})/)[0].replace(/\s+/g,'').replace(/\//g,'')
     var ptspot = document.getElementsByClassName('col-sm-7 text-left')[0].getElementsByTagName('span')[1].textContent
-    var daytimeF = document.getElementsByClassName('party_start_at')[0].textContent.match(/\d{2}(?=:)/)
-    var daytimeB = document.getElementsByClassName('party_start_at')[0].textContent.match(/(?<=:)\d{2}/)
-    document.title = `【参加者】[${daytimeF} : ${daytimeB}] ${ptspot}`;//タブ名
+    var daytimeF = document.getElementsByClassName('party_start_at')[0].getAttribute('data-start-at').match(/\d{2}(?=:)/)
+    var daytimeB = document.getElementsByClassName('party_start_at')[0].getAttribute('data-start-at').match(/(?<=:)\d{2}/)
+    document.title = `${daytimeF}:${daytimeB}|${ptdate}${ptspot}`;//タブ名
 }
 if (mwurl.match(/^(?=.*admin)(?=.*smartdevice_parties)/)) {
     var ProgressdaytimeF = document.getElementsByClassName('container mb-30')[0].textContent.match(/\d{2}(?=:)/)
@@ -527,7 +409,7 @@ if (mwurl.match(/^(?=.*admin)(?=.*parties)(?=.*search)/)) {
     var periodMafter = periodafter[0].match(/(?<=%2F)(.*?)(?=%2F)/)
     var periodDafter = periodafter[0].slice(-3)
     periodDafter = periodDafter.match(/(?<=F)\d+/)
-    document.title = `【PT一覧】${periodMfront[0]}/${periodDfront}～${periodMafter[0]}/${periodDafter}`;//タブ名
+    document.title = `${periodMfront[0]}${periodDfront}~${periodMafter[0]}${periodDafter}`;//タブ名
     $('.text-left:eq(0)').append($('<input type="button" id="id001102" value="" style="width:1px;height:1px;font-size:13px;" >').click(function () { //sボタン
         var NameAndjoinnum = []
         for (var pidi = 0; pidi < document.getElementsByClassName('col-sm-7 text-left').length; pidi++) {
@@ -536,14 +418,12 @@ if (mwurl.match(/^(?=.*admin)(?=.*parties)(?=.*search)/)) {
             var cusidinp2 = document.getElementsByClassName('party_floor span-separate-sentences')[pidi].textContent
             var cusidinp3 = document.getElementsByClassName('party_start_at')[pidi].textContent
             var cusparty_id = document.getElementsByClassName('party_id')[pidi].textContent
-
             var kikakunum = document.getElementsByClassName('table table-sm table-bordered')[pidi].textContent.match(/\d+(?=対)/)
             var joinman = document.getElementsByClassName('capacity_man')[pidi].previousElementSibling.textContent
             var joinwoman = document.getElementsByClassName('capacity_woman')[pidi].previousElementSibling.textContent
             var womanAge = document.getElementsByClassName('table table-sm table-bordered')[pidi].textContent.match(/(?<=年齢・条件\（女性\）\d+[~〜～])\d+(?=歳)/)
             var womanJsPass = document.querySelector(`#edit_party_${cusparty_id} > table > tbody > tr:nth-child(10) > td:nth-child(2) > div`).innerHTML.match(/(.*?)(?=<br>)/)[0]
             womanAge = womanAge || womanJsPass;
-
             NameAndjoinnum.push(`${cusidinp1} ${testPspan} ${cusidinp2} ${cusidinp3} ${joinman}-${joinwoman}(${kikakunum}-${kikakunum}) ${womanAge}`);
         }
         console.log(NameAndjoinnum.join('\n'));
